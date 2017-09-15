@@ -1,0 +1,27 @@
+[
+    {"command": "tasks", "function": "commandHelp",
+    "subcommands": [
+        {"command": "enable", "function": "commandTasksEnable"},
+        {"command": "disable", "function": "commandTasksDisable"}
+        ]
+    },
+    {"command": "reset", "function": "commandHelp",
+    "subcommands": [
+        {"command": "config", "function": "commandResetConfig"},
+        {"command": "tasks", "function": "commandResetTasks"}
+        ]
+    },
+    {"command": "set", "function": "commandHelp",
+    "subcommands": [
+        {"command": "rainbowrole", "function": "commandSetRainbowrole"},
+        {"command": "gw2channel", "function": "commandSetGw2Channel"}
+        ]
+    },
+    {"command": "get", "function": "commandHelp",
+    "subcommands": [
+        {"command": "tasks", "function": "commandGetTasks"},
+        {"command": "roles", "function": "commandGetRoles"},
+        {"command": "channels", "function": "commandGetChannels"}
+        ]
+    }
+]
