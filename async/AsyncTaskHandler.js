@@ -35,10 +35,10 @@ class AsyncTaskHandler { constructor(discordClient, config) {
         return "Task configuration reloaded!";
     }
     
-    this.getTaskList = function() {
-        let result = "";
+    this.print = function() {
+        let result = {embed: {title: "__Tasks:__", description: ""}};
         for (let i = 0; i < taskDefinitions.length; i++) {
-            result += (result == "" ? "" : ", ") + taskDefinitions[i].name;
+            result.embed.description += (result.embed.description == "" ? "" : "\n") + (taskDefinitions[i].enabled ? ":white_check_mark:\t" : ":negative_squared_cross_mark:\t") + taskDefinitions[i].name;
         }
         return result;
     }

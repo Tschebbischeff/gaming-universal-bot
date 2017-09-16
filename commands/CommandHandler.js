@@ -31,9 +31,7 @@ class CommandHandler { constructor(discordClient, config) {
                     let subPreCommand = ((preCommand == "" ? "" : preCommand + " ") + command);
                     let subCommand = args[0];
                     let subArgs = args.slice(1);
-                    if (handleSubCommand(message, subPreCommand, subCommand, subArgs, commandDef[i].subcommands) == "") {
-                        return "";
-                    }
+                    return handleSubCommand(message, subPreCommand, subCommand, subArgs, commandDef[i].subcommands);
                 }
                 if (commandExecutor.hasOwnProperty(commandDef[i].function)) {
                     commandExecutor[commandDef[i].function](message, preCommand, command, args);

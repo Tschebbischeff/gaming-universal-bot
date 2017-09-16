@@ -29,8 +29,8 @@ class CommandExecutor { constructor(discordClient, config) {
 	
 	let getHelpDefinition = function(preCommand, command) {
 		let commandChain = concatCommandChain(preCommand, command);
-		if (commandHelp.hasOwnProperty(commandChain)) {
-			return commandHelp[commandChain];
+		if (commandHelp.hasOwnProperty(commandChain.toLowerCase())) {
+			return commandHelp[commandChain.toLowerCase()];
 		} else {
 			return null;
 		}
@@ -51,44 +51,48 @@ class CommandExecutor { constructor(discordClient, config) {
 	}
     
     let displayHelp = function(message, preCommand, command) {
-		let helpMessage = "Help for command: \"" + concatCommandChain(preCommand, command) + "\"\n\n\t";
+		let helpMessage = {embed: {color: 4359924, title: "__Help for command: \"" + concatCommandChain(preCommand, command) + "\"__", type: "rich"}};
 		let helpOutputType = "channel";
 		let commandDef = getCommandDefinition(concatCommandChain(preCommand, command).split(" "), commandDefinitions);
 		if (commandDef == null) {
-			helpMessage += "This command does not exist.";
+			helpMessage.embed.description = "This command does not exist.";
 		} else {
 			let mainHelpDefinition = getHelpDefinition(preCommand, command);
 			if (mainHelpDefinition == null) {
-				helpMessage += "There exists no help on this command.\n\n"
+				helpMessage.embed.description = "There exists no help on this command.";
 			} else {
 				helpOutputType = mainHelpDefinition.type;
-				helpMessage += mainHelpDefinition.long + "\n\n"
+				helpMessage.embed.description = "*" + mainHelpDefinition.long + "*";
 			}
 			if (preCommand == "" && command == "help") {
+				let fieldsValue = "";
 				for (let i = 0; i < commandDefinitions.length; i++) {
-					helpMessage += commandDefinitions[i].command + "\n\t";
+					fieldsValue += (fieldsValue == "" ? "" : "\n") + "*__"+commandDefinitions[i].command+"__*";
 					let subHelpDefinition = getHelpDefinition("", commandDefinitions[i].command);
 					if (subHelpDefinition == null) {
-						helpMessage += "No description available.\n";
+						fieldsValue += "\n\tNo description available.";
 					} else {
-						helpMessage += subHelpDefinition.short + "\n";
+						fieldsValue += "\n\t"+subHelpDefinition.short.replace("\n", "\n\t");
 					}
+					
 				}
+				helpMessage.embed.fields = [{name: "Commands:", value: fieldsValue}];
 			} else {
+				let fieldsValue = "";
 				if (commandDef.hasOwnProperty("subcommands")) {
-					helpMessage += "The following subcommands are available:\n\n";
 					for (let i = 0; i < commandDef.subcommands.length; i++) {
-						helpMessage += commandDef.subcommands[i].command + "\n\t";
+						fieldsValue += (fieldsValue == "" ? "" : "\n") + "*__" + commandDef.subcommands[i].command + "__*";
 						let subHelpDefinition = getHelpDefinition(concatCommandChain(preCommand, command), commandDef.subcommands[i].command);
 						if (subHelpDefinition == null) {
-							helpMessage += "No description available.\n";
+							fieldsValue += "\n\tNo description available";
 						} else {
-							helpMessage += subHelpDefinition.short + "\n";
+							fieldsValue += "\n\t"+subHelpDefinition.short.replace("\n", "\n\t");
 						}
 					}
 				} else {
-					helpMessage += "This command has no subcommands.";
+					fieldsValue = "*This command has no subcommands*";
 				}
+				helpMessage.embed.fields = [{name: "The following subcommands are available:", value: fieldsValue}];
 			}
 		}
 		switch(helpOutputType) {
@@ -206,16 +210,18 @@ class CommandExecutor { constructor(discordClient, config) {
     }
     
     this.commandPrintTasks = function(message, preCommand, command, args) {
-        handleResult(message, asyncTaskHandler.getTaskList());
+        handleResult(message, asyncTaskHandler.print());
     }
     
     this.commandPrintRoles = function(message, preCommand, command, args) {
         let gamingUniversal = getValidGuild();
         if (gamingUniversal.available) {
-            let result = "";
+            let result = {embed: {title: "__Server Roles:__", description: ""}};
             gamingUniversal.roles.forEach(function(role, id) {
-                result += (result == "" ? "" : "\n") + id + " -> " + role.name;
-            })
+				if (role != "@everyone") {
+					result.embed.description += (result.embed.description == "" ? "" : "\n") + role.name + " [" + role.id + "]";
+				}
+            });
             handleResult(message, result);
         }
     }
@@ -223,16 +229,16 @@ class CommandExecutor { constructor(discordClient, config) {
     this.commandPrintChannels = function(message, preCommand, command, args) {
         let gamingUniversal = getValidGuild();
         if (gamingUniversal.available) {
-            let result = "";
+            let result = {embed: {title: "__Server Channels:__", description: ""}};
             gamingUniversal.channels.forEach(function(channel, id) {
-                result += (result == "" ? "" : "\n") + id + " [" + channel.type + "] -> " + channel.name;
-            })
+                result.embed.description += (result.embed.description == "" ? "" : "\n") + channel.name + "(" + channel.type + ") [" + channel.id + "]";
+            });
             handleResult(message, result);
         }
     }
 	
 	this.commandPrintConfig = function(message, preCommand, command, args) {
-		handleResult(message, config.getAsString());
+		handleResult(message, config.print());
 	}
 }}
 

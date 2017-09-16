@@ -23,8 +23,12 @@ class Config { constructor() {
         return "Configuration reloaded!";
     }
 	
-	this.getAsString = function() {
-		return JSON.stringify(config);
+	this.print = function() {
+		let result = {embed: {title: "__Configuration variables:__", fields: []}};
+		Object.keys(config).forEach(function(key) {
+			result.embed.fields.push({name: key, value: String(config[key])});
+		});
+		return result;
 	}
 	
 	this.getValidGuildId = function() {

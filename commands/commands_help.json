@@ -2,16 +2,81 @@
 	"help": {
 		"type": "channel",
 		"short": "Displays help on different commands.",
-		"long": "Type \"help <command>\" for any of the commands to obtain further information."
+		"long": "Type __help <command>__ for any of the commands to obtain further information."
 	},
 	"tasks": {
 		"type": "channel",
 		"short": "Manages tasks, which are executed in regular intervals.",
-		"long": "Manages tasks, which are executed in regular intervals, if activated.\n\tCan only be used with subcommands."
+		"long": "Manages tasks, which are executed in regular intervals, if activated.\nCan only be used with subcommands."
 	},
 	"tasks enable": {
 		"type": "channel",
 		"short": "Enables a task for regular execution.",
-		"long": "Enables a task for regular execution.\n\tUsage: tasks enable <taskname>\n\tTask names can be retrieved by issuing \"print tasks\""
+		"long": "__Usage: tasks enable <taskname>__\nEnables a task for regular execution.\nTask names can be retrieved by issuing __print tasks__"
+	},
+	"tasks disable": {
+		"type": "channel",
+		"short": "Disables a task.",
+		"long": "__Usage: tasks disable <taskname>__\nDisables a task after which it will no longer execute, until __tasks enable__ is issued.\nTask names can be retrieved by issuing __print tasks__"
+	},
+	"tasks reset": {
+		"type": "channel",
+		"short": "Resets all tasks to their default settings.",
+		"long": "__Usage: tasks reset__\nIssuing this command resets all tasks to their initial state.\nTasks that are enabled by default, will be enabled\nand tasks that are disabled by default, will be disabled."
+	},
+	"config": {
+		"type": "channel",
+		"short": "Configuration of the bot.",
+		"long": "Configure variables of the bot as well as tasks with the appropriate subcommand."
+	},
+	"config reset": {
+		"type": "channel",
+		"short": "Resets all configuration variables.",
+		"long": "__Usage: config reset__\nDelete all settings, and load initial settings for all variables."
+	},
+	"config set": {
+		"type": "channel",
+		"short": "Set a configuration variable.",
+		"long": "Set the value of a configuration variable with the appropriate subcommand."
+	},
+	"config set rainbowrole": {
+		"type": "channel",
+		"short": "Set the rainbow role channel.",
+		"long": "__Usage: config set RainbowRole <roleId|roleName>__\nSet the role, which changes its color in regular time intervals\nIf a name is supplied, the role is searched for and an error returned if it does not exist.\nIf an ID is supplied, which does not exist, the color changing role feature is turned off."
+	},
+	"config set serverlogchannel": {
+		"type": "channel",
+		"short": "Set the server logging channel.",
+		"long": "__Usage: config set ServerLogChannel <channelId|channelName>__\nSet the channel to which the server logs are posted.\n*Important*: Any messages in the channel, but the one containing the logs, are deleted.\nIf a name is supplied, the channel is searched for and an error returned if it does not exist.\nIf an ID is supplied, which does not exist, server logging is turned off."
+	},
+	"config set guildwars2channel": {
+		"type": "channel",
+		"short": "Set the Guild Wars 2 channel.",
+		"long": "__Usage: config set GuildWars2Channel <channelId|channelName>__\nSet the channel to which Guild Wars 2 related events are posted.\nIf a name is supplied, the channel is searched for and an error returned if it does not exist.\nIf an ID is supplied, which does not exist, server logging is turned off."
+	},
+	"print": {
+		"type": "channel",
+		"short": "Print information about the server or bot settings.",
+		"long": "Print different information related to the bot or the server itself with the appropriate subcommand."
+	},
+	"print config": {
+		"type": "channel",
+		"short": "Print configuration variables.",
+		"long": "__Usage: print config__\nPrint a list of all configuration variables and their current values."
+	},
+	"print tasks": {
+		"type": "channel",
+		"short": "Print task names and states.",
+		"long": "__Usage: print tasks__\nPrint a list of names of all available tasks, and whether they are enabled or disabled."
+	},
+	"print roles": {
+		"type": "channel",
+		"short": "Print role names and IDs",
+		"long": "__Usage: print roles__\nPrint a list of names of all roles on the server, including their ID."
+	},
+	"print channels": {
+		"type": "channel",
+		"short": "Print channel names and IDs",
+		"long": "__Usage: print channels__\nPrint a list of names of all channels on the server, including their ID."
 	}
 }
