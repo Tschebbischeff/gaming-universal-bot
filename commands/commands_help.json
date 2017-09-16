@@ -1,12 +1,17 @@
 {
 	"help": {
 		"type": "channel",
-		"short": "Zeigt die Hilfe für einzelne Befehle an.",
+		"short": "Displays help on different commands.",
 		"long": "Type \"help <command>\" for any of the commands to obtain further information."
 	},
 	"tasks": {
 		"type": "channel",
-		"short": "Verwaltet Aufgaben, die reglmäßig ausgeführt werden.",
-		"long": "Verwaltet Aufgaben, welche, falls aktiviert, in regelmäßigen Zeitintervallen ausgeführt werden."
+		"short": "Manages tasks, which are executed in regular intervals.",
+		"long": "Manages tasks, which are executed in regular intervals, if activated.\n\tCan only be used with subcommands."
+	},
+	"tasks enable": {
+		"type": "channel",
+		"short": "Enables a task for regular execution.",
+		"long": "Enables a task for regular execution.\n\tUsage: tasks enable <taskname>\n\tTask names can be retrieved by issuing \"print tasks\""
 	}
 }
