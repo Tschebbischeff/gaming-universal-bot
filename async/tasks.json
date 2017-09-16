@@ -18,7 +18,7 @@
     },{
         "name": "RainbowRole",
         "type": "INTERVAL",
-        "interval": 250,
+        "interval": 50,
         "function": "changeRainbowRoleColor",
         "args": {},
         "lastExecution": 0,
