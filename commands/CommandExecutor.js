@@ -170,14 +170,14 @@ class CommandExecutor { constructor(discordClient, config) {
                     channel = gamingUniversal.channels.find("name", args[0]);
                     if (channel != null) {
                         config.setServerLogChannelId(channel.id);
-                        handleResult(message, "Guild Wars 2 channel set!");
+                        handleResult(message, "Server Log channel set!");
                     } else {
                         handleResult(message, "Couldn't find channel '" + args[0] + "'!");
                     }
                 }
             } else {
                 config.setServerLogChannelId(channel);
-                handleResult(message, "Guild Wars 2 channel set!");
+                handleResult(message, "Server Log channel set!");
             }
         }
     }
