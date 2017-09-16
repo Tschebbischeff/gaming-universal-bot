@@ -11,7 +11,7 @@ const commandHandler = new CommandHandler(client, config);
 
 client.on("ready", () => {
 	console.log("Gaming Universal Bot is ready!");
-	client.user.setGame(config.get().prefix + 'help')
+	client.user.setGame(config.getPrefix() + 'help')
 		.catch(function(err) {
 			console.log(err);
 		});
@@ -20,7 +20,7 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-	if (!message.content.startsWith(commandHandler.getPrefix()) || message.author.bot || message.author.id != "194366857954721793" || message.channel.type != "text") {
+	if (!message.content.startsWith(config.getPrefix()) || message.author.bot || message.channel.type != "text") {
         return;
 	}
 	commandHandler.handleCommand(message);

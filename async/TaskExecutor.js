@@ -7,24 +7,24 @@ class TaskExecutor { constructor(discordClient, config) {
     let rainbowRoleIndex = 0;
     let canChangeColorAgain = true;
     
-    let getGamingUniversal = function() {
-        if (discordClient.guilds.has(config.get().validGuild)) {
-            return discordClient.guilds.get(config.get().validGuild);
+    let getValidGuild = function() {
+        if (discordClient.guilds.has(config.getValidGuildId())) {
+            return discordClient.guilds.get(config.getValidGuildId());
         }
         return null;
     }
     
     this.guildWarsBoss = function(args) {
-        config.hardDebug("guildWarsBossLastState", {"state": 1});
-        let gamingUniversal = getGamingUniversal();
-        config.hardDebug("guildWarsBossLastState", {"state": 2});
-        if (gamingUniversal.available && gamingUniversal.channels.has(config.get().gw2channel)) {
-            config.hardDebug("guildWarsBossLastState", {"state": 3});
-            let channel = gamingUniversal.channels.get(config.get().gw2channel);
-            config.hardDebug("guildwarsbosschannel", channel);
-            config.hardDebug("guildWarsBossLastState", {"state": 4});
+        //config.hardDebug("guildWarsBossLastState", {"state": 1});
+        let gamingUniversal = getValidGuild();
+        //config.hardDebug("guildWarsBossLastState", {"state": 2});
+        if (gamingUniversal.available && gamingUniversal.channels.has(config.getGuildWars2ChannelId())) {
+            //config.hardDebug("guildWarsBossLastState", {"state": 3});
+            let channel = gamingUniversal.channels.get(config.getGuildWars2ChannelId());
+            //config.hardDebug("guildwarsbosschannel", channel);
+            //config.hardDebug("guildWarsBossLastState", {"state": 4});
             if (channel.type == "text") {
-                config.hardDebug("guildWarsBossLastState", {"state": 5});
+                //config.hardDebug("guildWarsBossLastState", {"state": 5});
                 channel.send({embed: {
                         color: 16727070,
                         title: "Worldboss spawned!",
@@ -40,28 +40,28 @@ class TaskExecutor { constructor(discordClient, config) {
                     }}).catch(function(err) {
                         console.log("[guildWarsBoss] " + err.name + ":" + err.message + "\n" + err.stack);
                     });
-                config.hardDebug("guildWarsBossLastState", {"state": 6});
+                //config.hardDebug("guildWarsBossLastState", {"state": 6});
             }
         }
     };
     
     this.changeRainbowRoleColor = function(args) {
         if (canChangeColorAgain) {
-            config.hardDebug("rainbowroleLastState", {"state": 1});
-            let gamingUniversal = getGamingUniversal();
-            config.hardDebug("rainbowroleLastState", {"state": 2});
-            if (gamingUniversal.available && gamingUniversal.roles.has(config.get().rainbowrole)) {
-                config.hardDebug("rainbowroleLastState", {"state": 3});
-                let role = gamingUniversal.roles.get(config.get().rainbowrole);
-                config.hardDebug("rainbowrole", role);
-                config.hardDebug("rainbowroleLastState", {"state": 4});
+            //config.hardDebug("rainbowroleLastState", {"state": 1});
+            let gamingUniversal = getValidGuild();
+            //config.hardDebug("rainbowroleLastState", {"state": 2});
+            if (gamingUniversal.available && gamingUniversal.roles.has(config.getRainbowRoleId())) {
+                //config.hardDebug("rainbowroleLastState", {"state": 3});
+                let role = gamingUniversal.roles.get(config.getRainbowRoleId());
+                //config.hardDebug("rainbowrole", role);
+                //config.hardDebug("rainbowroleLastState", {"state": 4});
                 role.setColor(rainbowRoleColors[rainbowRoleIndex])
                     .then(function(role) {
                         canChangeColorAgain = true;
                     }).catch(function(err) {
                         console.log("[changeRainbowColor] " + err.name + ":" + err.message + "\n" + err.stack);
                     });
-                config.hardDebug("rainbowroleLastState", {"state": 5});
+                //config.hardDebug("rainbowroleLastState", {"state": 5});
                 rainbowRoleIndex = (rainbowRoleIndex+1) % rainbowRoleColors.length;
             }
         }

@@ -9,23 +9,83 @@ class Config { constructor() {
     } catch (e) {
         config = require("./config.json");
     }
-    
-    this.reset = function() {
-        config = require("./config.json");
-        return "Configuration reloaded!";
-    }
-    
-    this.get = function() {
-        return config;
-    }
-    
-    this.save = function() {
+	
+	let save = function() {
         fs.writeFile("./saved/config.json", JSON.stringify(config), function(err) {
             if (err != null) {
                 console.log(err);
             }
         });
     }
+	
+	this.reset = function() {
+        config = require("./config.json");
+        return "Configuration reloaded!";
+    }
+	
+	this.getAsString = function() {
+		return JSON.stringify(config);
+	}
+	
+	this.getValidGuildId = function() {
+		return config.validGuildId;
+	}
+	
+	this.setPrefix = function(p) {
+		config.prefix = p;
+		save();
+	}
+    
+    this.getPrefix = function() {
+		if (config.hasOwnProperty("prefix")) {
+			return config.prefix;
+		} else {
+			this.setPrefix(">>");
+			return ">>";
+		}
+    }
+	
+	this.setRainbowRoleId = function(id) {
+		config.rainbowRoleId = id;
+		save();
+	}
+	
+	this.getRainbowRoleId = function() {
+		if (config.hasOwnProperty("rainbowRoleId")) {
+			return config.rainbowRoleId;
+		} else {
+			this.setRainbowRoleId("0");
+			return "0";
+		}
+	}
+	
+	this.setGuildWars2ChannelId = function(id) {
+		config.guildWars2ChannelId = id;
+		save();
+	}
+	
+	this.getGuildWars2ChannelId = function() {
+		if (config.hasOwnProperty("guildWars2ChannelId")) {
+			return config.guildWars2ChannelId;
+		} else {
+			this.setGuildWars2ChannelId("0");
+			return "0";
+		}
+	}
+	
+	this.setServerLogChannelId = function(id) {
+		config.serverLogChannelId = id;
+		save();
+	}
+	
+	this.getServerLogChannelId = function() {
+		if (config.hasOwnProperty("serverLogChannelId")) {
+			return config.serverLogChannelId;
+		} else {
+			this.setServerLogChannelId("0");
+			return "0";
+		}
+	}
     
     this.hardDebug = function(ident, obj) {
         fs.writeFile("./debug/"+ident+".json", JSON.stringify(obj), function(err) {

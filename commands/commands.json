@@ -1,27 +1,22 @@
 [
-    {"command": "tasks", "function": "commandHelp",
-    "subcommands": [
+	{"command": "help"},
+    {"command": "tasks", "permission": "MANAGE_GUILD", "subcommands": [
         {"command": "enable", "function": "commandTasksEnable"},
-        {"command": "disable", "function": "commandTasksDisable"}
-        ]
-    },
-    {"command": "reset", "function": "commandHelp",
-    "subcommands": [
-        {"command": "config", "function": "commandResetConfig"},
-        {"command": "tasks", "function": "commandResetTasks"}
-        ]
-    },
-    {"command": "set", "function": "commandHelp",
-    "subcommands": [
-        {"command": "rainbowrole", "function": "commandSetRainbowrole"},
-        {"command": "gw2channel", "function": "commandSetGw2Channel"}
-        ]
-    },
-    {"command": "get", "function": "commandHelp",
-    "subcommands": [
-        {"command": "tasks", "function": "commandGetTasks"},
-        {"command": "roles", "function": "commandGetRoles"},
-        {"command": "channels", "function": "commandGetChannels"}
-        ]
-    }
+        {"command": "disable", "function": "commandTasksDisable"},
+		{"command": "reset", "function": "commandTasksReset"}
+    ]},
+    {"command": "config", "subcommands": [
+		{"command": "reset", "function": "commandConfigReset", "permission": "ADMINISTRATOR"},
+		{"command": "set", "subcommands": [
+			{"command": "RainbowRole", "function": "commandConfigSetRainbowRole", "permission": "MANAGE_GUILD"},
+			{"command": "ServerLogChannel", "function": "commandConfigSetServerLogChannel", "permission": "MANAGE_CHANNELS"},
+			{"command": "GuildWars2Channel", "function": "commandConfigSetGuildWars2Channel", "permission": "MANAGE_CHANNELS"}
+		]}
+    ]},
+    {"command": "print", "subcommands": [
+		{"command": "config", "function": "commandPrintConfig", "permission": "ADMINISTRATOR"},
+        {"command": "tasks", "function": "commandPrintTasks", "permission": "MANAGE_GUILD"},
+        {"command": "roles", "function": "commandPrintRoles", "permission": "MANAGE_GUILD"},
+        {"command": "channels", "function": "commandPrintChannels", "permission": "MANAGE_CHANNELS"}
+    ]}
 ]
