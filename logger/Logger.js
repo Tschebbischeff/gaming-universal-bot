@@ -29,7 +29,12 @@ class Logger { constructor() {
     }
 	
 	let compileLogLine = function(index) {
-		return (log[index].timestamp ? "<" + (new Date(log[index].timestamp)).toLocaleTimeString() + ">: " : "") + log[index].message;
+		if (log[index].timestamp) {
+			let ts = new Date(log[index].timestamp);
+			return "<" + (ts.getHours() < 10 ? "0" : "")+ts.getHours()+":"+(ts.getMinutes() < 10 ? "0" : "")+ts.getMinutes()+":"+(ts.getSeconds() < 10 ? "0" : "")+ts.getSeconds() + ">: " + log[index].message;
+		} else {
+			return log[index].message;
+		}
 	}
 	
 	let compileLogMessage = function() {
