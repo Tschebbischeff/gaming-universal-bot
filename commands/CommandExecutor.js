@@ -4,6 +4,7 @@ class CommandExecutor { constructor() {
     
 	const discordClient = require("./../DiscordClient");
 	const config = require("./../config/Config");
+	const logger = require("./../logger/Logger");
 	const gubLib = require("./../GUBLib");
 	const asyncTaskHandler = require("./../async/AsyncTaskHandler");
 	
@@ -201,6 +202,10 @@ class CommandExecutor { constructor() {
             }
         }
     }
+	
+	this.commandLogsReset = function(message, preCommand, command, args) {
+		handleResult(message, logger.reset());
+	}
     
     this.commandPrintTasks = function(message, preCommand, command, args) {
         handleResult(message, asyncTaskHandler.print());

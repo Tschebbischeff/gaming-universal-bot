@@ -49,7 +49,9 @@ class TaskExecutor { constructor() {
 						canChangeColorAgain = true;
                     });
                 rainbowRoleIndex = (rainbowRoleIndex+1) % rainbowRoleColors.length;
-            }
+            } else {
+				canChangeColorAgain = true;
+			}
         }
     };
     

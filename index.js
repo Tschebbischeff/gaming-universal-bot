@@ -13,6 +13,7 @@ client.on("ready", () => {
 			console.log(err);
 		});
 	asyncTaskHandler.startTasks();
+	logger.registerCallbacks();
 });
 
 client.on("message", (message) => {

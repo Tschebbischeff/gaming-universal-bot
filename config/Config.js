@@ -96,13 +96,12 @@ class Config { constructor() {
 		save();
 	}
 	
-	this.getServerLogMessageId = function(logger) {
+	this.getServerLogMessageId = function() {
 		if (config.hasOwnProperty()) {
 			return config.serverLogMessageId;
 		} else {
-			logMessageId = logger.createLogMessage();
-			this.setServerLogMessageId(logMessageId);
-			return logMessageId;
+			this.setServerLogMessageId("0");
+			return "0";
 		}
 	}
     

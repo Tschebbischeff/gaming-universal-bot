@@ -54,6 +54,16 @@
 		"short": "Set the Guild Wars 2 channel.",
 		"long": "__Usage: config set GuildWars2Channel <channelId|channelName>__\nSet the channel to which Guild Wars 2 related events are posted.\nIf a name is supplied, the channel is searched for and an error returned if it does not exist.\nIf an ID is supplied, which does not exist, server logging is turned off."
 	},
+	"logs": {
+		"type": "channel",
+		"short": "Control the logging for multiple events on the server.",
+		"long": "Control server related event logging with the appropriate subcommand."
+	},
+	"logs reset": {
+		"type": "channel",
+		"short": "Delete the complete Log.",
+		"long": "__Usage: logs reset__\nDelete all kept logs and reset the Log message if one exists."
+	},
 	"print": {
 		"type": "channel",
 		"short": "Print information about the server or bot settings.",
