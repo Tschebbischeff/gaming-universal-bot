@@ -1,1 +1,1 @@
-worker: node --trace-warnings index.js
+worker: node --trace-warnings --trace-deprecation index.js
