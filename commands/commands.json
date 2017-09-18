@@ -14,7 +14,8 @@
 		]}
     ]},
 	{"command": "logs", "subcommands": [
-		{"command": "reset", "function": "commandLogsReset", "permission": "MANAGE_GUILD"}
+		{"command": "reset", "function": "commandLogsReset", "permission": "MANAGE_GUILD"},
+		{"command": "show", "function": "commandLogsShow"}
 	]},
     {"command": "print", "subcommands": [
 		{"command": "config", "function": "commandPrintConfig", "permission": "ADMINISTRATOR"},

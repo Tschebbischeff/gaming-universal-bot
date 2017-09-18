@@ -97,7 +97,7 @@ class Config { constructor() {
 	}
 	
 	this.getServerLogMessageId = function() {
-		if (config.hasOwnProperty()) {
+		if (config.hasOwnProperty("serverLogMessageId")) {
 			return config.serverLogMessageId;
 		} else {
 			this.setServerLogMessageId("0");

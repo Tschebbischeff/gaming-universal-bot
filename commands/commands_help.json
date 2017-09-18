@@ -12,7 +12,7 @@
 	"tasks enable": {
 		"type": "channel",
 		"short": "Enables a task for regular execution.",
-		"long": "__Usage: tasks enable <taskname>__\nEnables a task for regular execution.\nTask names can be retrieved by issuing __print tasks__"
+		"long": "__Usage: tasks enable <TaskName>__\nEnables a task for regular execution.\nTask names can be retrieved by issuing __print tasks__"
 	},
 	"tasks disable": {
 		"type": "channel",
@@ -57,12 +57,17 @@
 	"logs": {
 		"type": "channel",
 		"short": "Control the logging for multiple events on the server.",
-		"long": "Control server related event logging with the appropriate subcommand."
+		"long": "Control server related event logging or show previous log messages with the appropriate subcommand."
 	},
 	"logs reset": {
 		"type": "channel",
 		"short": "Delete the complete Log.",
 		"long": "__Usage: logs reset__\nDelete all kept logs and reset the Log message if one exists."
+	},
+	"logs show": {
+		"type": "channel",
+		"short": "Shows log messages.",
+		"long": "__Usage: logs show <PageNumber|DateAndTime>__\nShow as many log entries as possible.\nTHIS FUNCTION IS NOT IMPLEMENTED YET!"
 	},
 	"print": {
 		"type": "channel",

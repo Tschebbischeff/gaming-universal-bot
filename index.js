@@ -23,8 +23,4 @@ client.on("message", (message) => {
 	commandHandler.handleCommand(message);
 });
 
-/*process.on('unhandledRejection', function(err) {
-	console.log("[UNHANDLED] " + err.name + ":" + err.message + "\n" + err.stack);
-});*/
-
 client.login(process.env.GAMING_UNIVERSAL_BOT_TOKEN);

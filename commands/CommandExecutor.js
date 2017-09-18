@@ -206,6 +206,10 @@ class CommandExecutor { constructor() {
 	this.commandLogsReset = function(message, preCommand, command, args) {
 		handleResult(message, logger.reset());
 	}
+	
+	this.commandLogsShow = function(message, preCommand, command, args) {
+		handleResult(message, "Sorry, I am a stupid bot and don't know how to do that yet...");
+	}
     
     this.commandPrintTasks = function(message, preCommand, command, args) {
         handleResult(message, asyncTaskHandler.print());

@@ -1,5 +1,14 @@
 [
-    {
+	{
+        "name": "PeriodicServerLogUpdate",
+        "type": "INTERVAL",
+        "interval": 5000,
+        "function": "updateServerLog",
+        "args": {},
+        "lastExecution": 0,
+		"repeatAfterMiss": false,
+        "enabled": true
+    },{
         "name": "GWBossShadowBehemoth",
         "type": "SYNCED_DAY_INTERVAL",
         "hour": 1,
