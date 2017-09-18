@@ -1,21 +1,20 @@
 'use strict'
 
-const TaskExecutor = require("./TaskExecutor");
-
-class AsyncTaskHandler { constructor(discordClient, config) {
+class AsyncTaskHandler { constructor() {
     
-    let taskExecutor = new TaskExecutor(discordClient, config);
+    const taskExecutor = require("./TaskExecutor");
+	
     const MAX_TASK_ERROR_COUNT = 1;
     let fs = require("fs");
-    let taskDefinitions;
+    let taskDef;
     try {
-        taskDefinitions = require("./../saved/tasks.json");
+        taskDef = require("./../saved/tasks.json");
     } catch (e) {
-        taskDefinitions = require("./tasks.json");
+        taskDef = require("./tasks.json");
     }
     
     let saveTaskDefinitions = function() {
-        fs.writeFile("./saved/tasks.json", JSON.stringify(taskDefinitions), function(err) {
+        fs.writeFile("./saved/tasks.json", JSON.stringify(taskDef), function(err) {
             if (err != null) {
                 console.log(err);
             }
@@ -23,13 +22,13 @@ class AsyncTaskHandler { constructor(discordClient, config) {
     }
     
     this.resetTaskDefinitions = function() {
-        for (let i = 0; i < taskDefinitions.length; i++) {
-            this.disableTaskByName(taskDefinitions[i].name);
+        for (let i = 0; i < taskDef.length; i++) {
+            this.disableTaskByName(taskDef[i].name);
         }
-        taskDefinitions = require("./tasks.json");
-        for (let i = 0; i < taskDefinitions.length; i++) {
-            if (taskDefinitions[i].enabled) {
-                startTask(taskDefinitions[i]);
+        taskDef = require("./tasks.json");
+        for (let i = 0; i < taskDef.length; i++) {
+            if (taskDef[i].enabled) {
+                startTask(i);
             }
         }
         return "Task configuration reloaded!";
@@ -37,17 +36,17 @@ class AsyncTaskHandler { constructor(discordClient, config) {
     
     this.print = function() {
         let result = {embed: {title: "__Tasks:__", description: ""}};
-        for (let i = 0; i < taskDefinitions.length; i++) {
-            result.embed.description += (result.embed.description == "" ? "" : "\n") + (taskDefinitions[i].enabled ? ":white_check_mark:\t" : ":negative_squared_cross_mark:\t") + taskDefinitions[i].name;
+        for (let i = 0; i < taskDef.length; i++) {
+            result.embed.description += (result.embed.description == "" ? "" : "\n") + (taskDef[i].enabled ? ":white_check_mark:\t" : ":negative_squared_cross_mark:\t") + taskDef[i].name;
         }
         return result;
     }
     
     this.disableTaskByName = function(name) {
-        for (let i = 0; i < taskDefinitions.length; i++) {
-            if (taskDefinitions[i].name.toLowerCase() == name.toLowerCase()) {
-                if (taskDefinitions[i].enabled) {
-                    taskDefinitions[i].enabled = false;
+        for (let i = 0; i < taskDef.length; i++) {
+            if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
+                if (taskDef[i].enabled) {
+                    taskDef[i].enabled = false;
                     saveTaskDefinitions();
                     return "Task '" + name + "' successfully disabled!";
                 }
@@ -58,11 +57,11 @@ class AsyncTaskHandler { constructor(discordClient, config) {
     }
     
     this.enableTaskByName = function(name) {
-        for (let i = 0; i < taskDefinitions.length; i++) {
-            if (taskDefinitions[i].name.toLowerCase() == name.toLowerCase()) {
-                if (!taskDefinitions[i].enabled) {
-                    taskDefinitions[i].enabled = true;
-                    startTask(taskDefinitions[i]);
+        for (let i = 0; i < taskDef.length; i++) {
+            if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
+                if (!taskDef[i].enabled) {
+                    taskDef[i].enabled = true;
+                    startTask(i);
                     saveTaskDefinitions();
                     return "Task '" + name + "' successfully enabled!";
                 }
@@ -72,52 +71,49 @@ class AsyncTaskHandler { constructor(discordClient, config) {
         return "No task with name " + name;
     }
     
-    this.getTaskDefinitions = function() {
-        return taskDefinitions;
-    }
-    
-    let getNextExecutionTime = function(taskDef) {
+    let getNextExecutionTime = function(taskId) {
         let nextExecution = 0;
         let now = new Date();
-        switch(taskDef.type) {
+        switch(taskDef[taskId].type) {
 	        case "INTERVAL":
-	            nextExecution = taskDef.lastExecution+taskDef.interval;
+	            nextExecution = taskDef[taskId].lastExecution+taskDef[taskId].interval;
 	            if (nextExecution < now.getTime()) {
-        	        if (taskDef.repeatAfterMiss) {
+        	        if (taskDef[taskId].repeatAfterMiss) {
                         nextExecution = now.getTime();
         	        } else {
-        	            taskDef.lastExecution = now.getTime() - 1;
+        	            taskDef[taskId].lastExecution = now.getTime() - 1;
         	            saveTaskDefinitions();
-        	            nextExecution = getNextExecutionTime(taskDef);
+        	            nextExecution = getNextExecutionTime(taskId);
         	        }
                 }
 	        break;
 	        case "SYNCED_DAY_INTERVAL":
-	            nextExecution = (new Date(now.getFullYear(), now.getMonth(), now.getDate(), taskDef.hour, taskDef.minute, taskDef.second)).getTime();
+	            nextExecution = (new Date(now.getFullYear(), now.getMonth(), now.getDate(), taskDef[taskId].hour, taskDef[taskId].minute, taskDef[taskId].second)).getTime();
 	            while (nextExecution < now) {
-	                nextExecution += taskDef.interval;
+	                nextExecution += taskDef[taskId].interval;
 	            }
 	        break;
 	    }
 	    return nextExecution;
     }
+	
+	let sleep = function(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
     
-    let startTask = function(taskDef) {
-        let sleep = function(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-        let nextExecution = getNextExecutionTime(taskDef);
+    let startTask = function(taskId) {
+        let nextExecution = getNextExecutionTime(taskId);
         let asyncFnc = async function() {
-            console.log("Thread for Task " + taskDef.name + " ready and running...");
+            console.log("Thread for Task " + taskDef[taskId].name + " ready and running...");
             let now;
             let errorCount = 0;
-    	    while(taskDef.enabled && errorCount < MAX_TASK_ERROR_COUNT) {
+    	    while(taskDef[taskId].enabled && errorCount < MAX_TASK_ERROR_COUNT) {
     	        try {
                     now = Date.now();
                 	if (nextExecution<=now) {
-            	        taskExecutor[taskDef.function](taskDef.args);
-            	        taskDef.lastExecution = nextExecution;
-            	        nextExecution = getNextExecutionTime(taskDef);
+            	        taskExecutor[taskDef[taskId].function](taskDef[taskId].args);
+            	        taskDef[taskId].lastExecution = nextExecution;
+            	        nextExecution = getNextExecutionTime(taskId);
             	        saveTaskDefinitions();
             	    } else {
             	        await sleep(30);
@@ -128,21 +124,23 @@ class AsyncTaskHandler { constructor(discordClient, config) {
                 }
     	    }
     	    if (errorCount < MAX_TASK_ERROR_COUNT) {
-                console.log("Thread for Task " + taskDef.name + " stopped...");
+                console.log("Thread for Task " + taskDef[taskId].name + " stopped...");
     	    } else {
-    	        console.log("Task " + taskDef.name + " encountered too many errors and was stopped and disabled.");
-    	        taskDef.enabled = false;
+    	        console.log("Task " + taskDef[taskId].name + " encountered too many errors and was stopped and disabled.");
+    	        taskDef[taskId].enabled = false;
                 saveTaskDefinitions();
     	    }
         };
         asyncFnc();
     }
     
-    for (let i = 0; i < taskDefinitions.length; i++) {
-        if (taskDefinitions[i].enabled) {
-            startTask(taskDefinitions[i]);
-        }
-    }
+	this.startTasks = function() {
+		for (let i = 0; i < taskDef.length; i++) {
+			if (taskDef[i].enabled) {
+				startTask(i);
+			}
+		}
+	}
 }}
 
-module.exports = AsyncTaskHandler;
+module.exports = new AsyncTaskHandler();

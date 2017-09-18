@@ -1,21 +1,14 @@
 'use strict'
 
-class CommandExecutor { constructor(discordClient, config) {
+class CommandExecutor { constructor() {
     
-    let asyncTaskHandler = null;
+	const discordClient = require("./../DiscordClient");
+	const config = require("./../config/Config");
+	const gubLib = require("./../GUBLib");
+	const asyncTaskHandler = require("./../async/AsyncTaskHandler");
+	
 	let commandDefinitions = require("./commands.json");
 	let commandHelp = require("./commands_help.json");
-    
-    let getValidGuild = function() {
-        if (discordClient.guilds.has(config.getValidGuildId())) {
-            return discordClient.guilds.get(config.getValidGuildId());
-        }
-        return null;
-    }
-    
-    this.setAsyncTaskHandler = function(handler) {
-        asyncTaskHandler = handler;
-    }
     
     let handleResult = function(message, result) {
         if (result != null) {
@@ -146,7 +139,7 @@ class CommandExecutor { constructor(discordClient, config) {
         } else {
             let rainbowrole = parseInt(args[0]);
             if (isNaN(rainbowrole)) {
-                let gamingUniversal = getValidGuild();
+                let gamingUniversal = gubLib.getValidGuild();
                 if (gamingUniversal.available) {
                     rainbowrole = gamingUniversal.roles.find("name", args[0]);
                     if (rainbowrole != null) {
@@ -169,7 +162,7 @@ class CommandExecutor { constructor(discordClient, config) {
         } else {
             let channel = parseInt(args[0]);
             if (isNaN(channel)) {
-                let gamingUniversal = getValidGuild();
+                let gamingUniversal = gubLib.getValidGuild();
                 if (gamingUniversal.available) {
                     channel = gamingUniversal.channels.find("name", args[0]);
                     if (channel != null) {
@@ -192,7 +185,7 @@ class CommandExecutor { constructor(discordClient, config) {
         } else {
             let channel = parseInt(args[0]);
             if (isNaN(channel)) {
-                let gamingUniversal = getValidGuild();
+                let gamingUniversal = gubLib.getValidGuild();
                 if (gamingUniversal.available) {
                     channel = gamingUniversal.channels.find("name", args[0]);
                     if (channel != null) {
@@ -214,7 +207,7 @@ class CommandExecutor { constructor(discordClient, config) {
     }
     
     this.commandPrintRoles = function(message, preCommand, command, args) {
-        let gamingUniversal = getValidGuild();
+        let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available) {
             let result = {embed: {title: "__Server Roles:__", description: ""}};
             gamingUniversal.roles.forEach(function(role, id) {
@@ -227,7 +220,7 @@ class CommandExecutor { constructor(discordClient, config) {
     }
     
     this.commandPrintChannels = function(message, preCommand, command, args) {
-        let gamingUniversal = getValidGuild();
+        let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available) {
             let result = {embed: {title: "__Server Channels:__", description: ""}};
             gamingUniversal.channels.forEach(function(channel, id) {
@@ -242,4 +235,4 @@ class CommandExecutor { constructor(discordClient, config) {
 	}
 }}
 
-module.exports = CommandExecutor;
+module.exports = new CommandExecutor();

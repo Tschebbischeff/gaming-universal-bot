@@ -1,18 +1,13 @@
 'use strict'
 
-const CommandExecutor = require("./CommandExecutor");
-
-class CommandHandler { constructor(discordClient, config) {
+class CommandHandler { constructor() {
     
-    let commandExecutor = new CommandExecutor(discordClient, config);
+	const config = require("./../config/Config");
+	const commandExecutor = require("./CommandExecutor");
     let commandDefinitions = require("./commands.json");
 	
 	let concatCommandChain = function(preCommand, command) {
         return preCommand == "" ? command : preCommand + " " + command;
-    }
-    
-    this.setAsyncTaskHandler = function(handler) {
-        commandExecutor.setAsyncTaskHandler(handler);
     }
     
     let handleSubCommand = function(message, preCommand, command, args, commandDef) {
@@ -59,4 +54,4 @@ class CommandHandler { constructor(discordClient, config) {
     };
 }}
 
-module.exports = CommandHandler;
+module.exports = new CommandHandler();

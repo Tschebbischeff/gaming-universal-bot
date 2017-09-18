@@ -90,6 +90,21 @@ class Config { constructor() {
 			return "0";
 		}
 	}
+	
+	this.setServerLogMessageId = function(id) {
+		config.serverLogMessageId = id;
+		save();
+	}
+	
+	this.getServerLogMessageId = function(logger) {
+		if (config.hasOwnProperty()) {
+			return config.serverLogMessageId;
+		} else {
+			logMessageId = logger.createLogMessage();
+			this.setServerLogMessageId(logMessageId);
+			return logMessageId;
+		}
+	}
     
     this.hardDebug = function(ident, obj) {
         fs.writeFile("./debug/"+ident+".json", JSON.stringify(obj), function(err) {
@@ -101,4 +116,4 @@ class Config { constructor() {
     
 }}
 
-module.exports = Config;
+module.exports = new Config();
