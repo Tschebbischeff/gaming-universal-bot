@@ -72,54 +72,6 @@ class Logger { constructor() {
 		this.updateLogMessage();
 	}
 	
-	this.updateLogMessage = function() {
-		if (needsUpdating && !updatingLogMessage && !creatingLogMessage) {
-			updatingLogMessage = true;
-			needsUpdating = false;
-			let messageId = config.getServerLogMessageId(this);
-			if (messageId == "0") {
-				updatingLogMessage = false;
-				this.createLogMessage();
-			} else {
-				let validGuild = gubLib.getValidGuild();
-				let channelId = config.getServerLogChannelId();
-				if (validGuild.available && validGuild.channels.has(channelId)) {
-					let channel = validGuild.channels.get(channelId);
-					if (channel.type == "text") {
-						channel.fetchMessages()
-						.then(function(msgs) {
-							if (msgs.has(messageId)) {
-								let message = msgs.get(messageId);
-								if (message.editable) {
-									message.edit(compileLogMessage())
-									.then(function(msg) {
-										updatingLogMessage = false;
-									}).catch(function(err) {
-										console.log("[Logger] " + err.name + ":" + err.message + "\n" + err.stack);
-										updatingLogMessage = false;
-									});
-								} else {
-									updatingLogMessage = false;
-									this.createLogMessage();
-								}
-							} else {
-								updatingLogMessage = false;
-								this.createLogMessage();
-							}
-						}).catch(function(err) {
-							console.log("[Logger] " + err.name + ":" + err.message + "\n" + err.stack);
-							updatingLogMessage = false;
-						});
-					} else {
-						updatingLogMessage = false;
-					}
-				} else {
-					updatingLogMessage = false;
-				}
-			}
-		}
-	}
-	
 	let sendLogMessage = function(channel) {
 		let message = compileLogMessage();
 		if (message != "") {
@@ -137,7 +89,7 @@ class Logger { constructor() {
 		}
 	}
 	
-	this.createLogMessage = function() {
+	let createLogMessage = function() {
 		if (!updatingLogMessage && !creatingLogMessage) {
 			creatingLogMessage = true;
 			let validGuild = gubLib.getValidGuild();
@@ -179,11 +131,61 @@ class Logger { constructor() {
 		}
 	}
 	
+	this.updateLogMessage = function() {
+		if (needsUpdating && !updatingLogMessage && !creatingLogMessage) {
+			updatingLogMessage = true;
+			needsUpdating = false;
+			let messageId = config.getServerLogMessageId(this);
+			if (messageId == "0") {
+				updatingLogMessage = false;
+				createLogMessage();
+			} else {
+				let validGuild = gubLib.getValidGuild();
+				let channelId = config.getServerLogChannelId();
+				if (validGuild.available && validGuild.channels.has(channelId)) {
+					let channel = validGuild.channels.get(channelId);
+					if (channel.type == "text") {
+						channel.fetchMessages()
+						.then(function(msgs) {
+							if (msgs.has(messageId)) {
+								let message = msgs.get(messageId);
+								if (message.editable) {
+									message.edit(compileLogMessage())
+									.then(function(msg) {
+										updatingLogMessage = false;
+									}).catch(function(err) {
+										console.log("[Logger] " + err.name + ":" + err.message + "\n" + err.stack);
+										updatingLogMessage = false;
+									});
+								} else {
+									updatingLogMessage = false;
+									createLogMessage();
+								}
+							} else {
+								updatingLogMessage = false;
+								createLogMessage();
+							}
+						}).catch(function(err) {
+							console.log("[Logger] " + err.name + ":" + err.message + "\n" + err.stack);
+							updatingLogMessage = false;
+						});
+					} else {
+						updatingLogMessage = false;
+					}
+				} else {
+					updatingLogMessage = false;
+				}
+			}
+		}
+	}
+	
 	this.registerCallbacks = function() {
 		let validGuild = gubLib.getValidGuild();
 		discordClient.on("guildMemberUpdate", (oldMember, newMember) => {
 			if (oldMember.guild.id == validGuild.id || newMember.guild.id == validGuild.id) {
-				this.write("\"" + (oldMember.nickname ? oldMember.nickname : oldMember.user.username) + "\" is now called \"" + (newMember.nickname ? newMember.nickname : newMember.user.username) + "\"");
+				if (oldMember.nickname != newMember.nickname) {
+					this.write("\"" + (oldMember.nickname ? oldMember.nickname : oldMember.user.username) + "\" is now called \"" + (newMember.nickname ? newMember.nickname : newMember.user.username) + "\"");
+				}
 			}
 		});
 		discordClient.on("guildMemberAdd", (guildMember) => {
