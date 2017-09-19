@@ -25,6 +25,150 @@
         "lastExecution": 0,
         "enabled": true
     },{
+        "name": "GWBossFireElemental",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 0,
+        "minute": 45,
+        "second": 0,
+        "interval": 7200000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Fire Elemental", "url": "https://wiki.guildwars2.com/wiki/Fire_Elemental_(boss)"},
+            "zone": {"caption": "Metrica Province", "url": "https://wiki.guildwars2.com/wiki/Metrica_Province"},
+            "area": {"caption": "Thaumanova Reactor", "url": "https://wiki.guildwars2.com/wiki/Thaumanova_Reactor"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Destroy_the_fire_elemental_created_from_chaotic_energy_fusing_with_the_C.L.E.A.N._5000%27s_energy_core"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossGreatJungleWurm",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 1,
+        "minute": 15,
+        "second": 0,
+        "interval": 7200000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Great Jungle Wurm", "url": "https://wiki.guildwars2.com/wiki/Great_Jungle_Wurm"},
+            "zone": {"caption": "Caledon Forest", "url": "https://wiki.guildwars2.com/wiki/Caledon_Forest"},
+            "area": {"caption": "Wychmire Swamp", "url": "https://wiki.guildwars2.com/wiki/Wychmire_Swamp"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_great_jungle_wurm"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossTequatlTheSunless",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "interval": 10800000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Tequatl the Sunless", "url": "https://wiki.guildwars2.com/wiki/Tequatl_the_Sunless"},
+            "zone": {"caption": "Sparkfly Fen", "url": "https://wiki.guildwars2.com/wiki/Sparkfly_Fen"},
+            "area": {"caption": "Splintered Coast", "url": "https://wiki.guildwars2.com/wiki/Splintered_Coast"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_Tequatl_the_Sunless"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossInquestGolemMarkII",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 2,
+        "minute": 0,
+        "second": 0,
+        "interval": 10800000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Inquest Golem Mark II", "url": "https://wiki.guildwars2.com/wiki/Inquest_Golem_Mark_II"},
+            "zone": {"caption": "Mount Maelstrom", "url": "https://wiki.guildwars2.com/wiki/Mount_Maelstrom"},
+            "area": {"caption": "Whitland Flats", "url": "https://wiki.guildwars2.com/wiki/Whitland_Flats"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_Inquest%27s_golem_Mark_II"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossClawOfJormag",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 2,
+        "minute": 30,
+        "second": 0,
+        "interval": 10800000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Claw of Jormag", "url": "https://wiki.guildwars2.com/wiki/Claw_of_Jormag"},
+            "zone": {"caption": "Frostgorge Sound", "url": "https://wiki.guildwars2.com/wiki/Frostgorge_Sound"},
+            "area": {"caption": "Frostwalk Tundra", "url": "https://wiki.guildwars2.com/wiki/Frostwalk_Tundra"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_Claw_of_Jormag"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossAdmiralTaidhaCovington",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "interval": 10800000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Admiral Taidha Covington", "url": "https://wiki.guildwars2.com/wiki/Admiral_Taidha_Covington"},
+            "zone": {"caption": "Bloodtide Coast", "url": "https://wiki.guildwars2.com/wiki/Bloodtide_Coast"},
+            "area": {"caption": "Laughing Gull Island", "url": "https://wiki.guildwars2.com/wiki/Laughing_Gull_Island"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Kill_Admiral_Taidha_Covington"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossSvanirShaman",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 0,
+        "minute": 15,
+        "second": 0,
+        "interval": 7200000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Svanir Shaman", "url": "https://wiki.guildwars2.com/wiki/Champion_Svanir_Shaman_Chief"},
+            "zone": {"caption": "Wayfarer Foothills", "url": "https://wiki.guildwars2.com/wiki/Wayfarer_Foothills"},
+            "area": {"caption": "Frusenfell Creek", "url": "https://wiki.guildwars2.com/wiki/Frusenfell_Creek"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Kill_the_Svanir_shaman_chief_to_break_his_control_over_the_ice_elemental"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossUlgothTheModniir",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 1,
+        "minute": 30,
+        "second": 0,
+        "interval": 10800000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Ulgoth the Modniir", "url": "https://wiki.guildwars2.com/wiki/Modniir_Ulgoth"},
+            "zone": {"caption": "Harathi Hinterlands", "url": "https://wiki.guildwars2.com/wiki/Harathi_Hinterlands"},
+            "area": {"caption": "Modniir Gorge", "url": "https://wiki.guildwars2.com/wiki/Modniir_Gorge"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_Ulgoth_the_Modniir_and_his_minions"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
+        "name": "GWBossMegadestroyer",
+        "type": "SYNCED_DAY_INTERVAL",
+        "hour": 1,
+        "minute": 30,
+        "second": 0,
+        "interval": 7200000,
+        "function": "guildWarsBoss",
+        "args": {
+            "name": {"caption": "Megadestroyer", "url": "https://wiki.guildwars2.com/wiki/Megadestroyer"},
+            "zone": {"caption": "Mount Maelstrom", "url": "https://wiki.guildwars2.com/wiki/Mount_Maelstrom"},
+            "area": {"caption": "Maelstrom's Bile", "url": "https://wiki.guildwars2.com/wiki/Maelstrom%27s_Bile"},
+            "eventurl": "https://wiki.guildwars2.com/wiki/Kill_the_megadestroyer_before_it_blows_everyone_up"
+        },
+        "lastExecution": 0,
+        "enabled": true
+    },{
         "name": "RainbowRole",
         "type": "INTERVAL",
         "interval": 50,
