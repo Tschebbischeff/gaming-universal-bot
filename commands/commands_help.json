@@ -12,12 +12,12 @@
 	"tasks enable": {
 		"type": "channel",
 		"short": "Enables a task for regular execution.",
-		"long": "__Usage: tasks enable <TaskName>__\nEnables a task for regular execution.\nTask names can be retrieved by issuing __print tasks__"
+		"long": "__Usage: tasks enable <TaskName|\"all\">__\nEnables a task for regular execution.\nTask names can be retrieved by issuing __print tasks__"
 	},
 	"tasks disable": {
 		"type": "channel",
 		"short": "Disables a task.",
-		"long": "__Usage: tasks disable <taskname>__\nDisables a task after which it will no longer execute, until __tasks enable__ is issued.\nTask names can be retrieved by issuing __print tasks__"
+		"long": "__Usage: tasks disable <TaskName|\"all\">__\nDisables a task after which it will no longer execute, until __tasks enable__ is issued.\nTask names can be retrieved by issuing __print tasks__"
 	},
 	"tasks reset": {
 		"type": "channel",

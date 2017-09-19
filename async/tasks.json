@@ -9,6 +9,15 @@
 		"repeatAfterMiss": false,
         "enabled": true
     },{
+        "name": "RainbowRole",
+        "type": "INTERVAL",
+        "interval": 1000,
+        "function": "changeRainbowRoleColor",
+        "args": {},
+        "lastExecution": 0,
+        "repeatAfterMiss": false,
+        "enabled": true
+    },{
         "name": "GWBossShadowBehemoth",
         "type": "SYNCED_DAY_INTERVAL",
         "hour": 1,
@@ -167,15 +176,6 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Kill_the_megadestroyer_before_it_blows_everyone_up"
         },
         "lastExecution": 0,
-        "enabled": true
-    },{
-        "name": "RainbowRole",
-        "type": "INTERVAL",
-        "interval": 50,
-        "function": "changeRainbowRoleColor",
-        "args": {},
-        "lastExecution": 0,
-        "repeatAfterMiss": false,
         "enabled": true
     }
 ]

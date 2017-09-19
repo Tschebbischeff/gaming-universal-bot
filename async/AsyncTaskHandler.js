@@ -12,6 +12,7 @@ class AsyncTaskHandler { constructor() {
     } catch (e) {
         taskDef = require("./tasks.json");
     }
+	let resetIteration = 0;
     
     let saveTaskDefinitions = function() {
         fs.writeFile("./saved/tasks.json", JSON.stringify(taskDef), function(err) {
@@ -22,15 +23,14 @@ class AsyncTaskHandler { constructor() {
     }
     
     this.resetTaskDefinitions = function() {
-        for (let i = 0; i < taskDef.length; i++) {
-            this.disableTaskByName(taskDef[i].name);
-        }
+        resetIteration++;
         taskDef = require("./tasks.json");
         for (let i = 0; i < taskDef.length; i++) {
             if (taskDef[i].enabled) {
                 startTask(i);
             }
         }
+		saveTaskDefinitions();
         return "Task configuration reloaded!";
     }
     
@@ -44,21 +44,30 @@ class AsyncTaskHandler { constructor() {
     
     this.disableTaskByName = function(name) {
         for (let i = 0; i < taskDef.length; i++) {
-            if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
-                if (taskDef[i].enabled) {
-                    taskDef[i].enabled = false;
-                    saveTaskDefinitions();
-                    return "Task '" + name + "' successfully disabled!";
-                }
-                return "Task '" + name + "' already disabled!";
-            }
+			if (name.toLowerCase() == "all") {
+				taskDef[i].enabled = false;
+			} else if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
+				if (taskDef[i].enabled) {
+					taskDef[i].enabled = false;
+					saveTaskDefinitions();
+					return "Task '" + name + "' successfully disabled!";
+				}
+				return "Task '" + name + "' already disabled!";
+			}
         }
+		if (name.toLowerCase() == "all") {
+			saveTaskDefinitions();
+			return "All tasks disabled!";
+		}
         return "No task with name '" + name + "'!";
     }
     
     this.enableTaskByName = function(name) {
         for (let i = 0; i < taskDef.length; i++) {
-            if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
+			if (name.toLowerCase() == "all") {
+				taskDef[i].enabled = true;
+				startTask(i);
+			} else if (taskDef[i].name.toLowerCase() == name.toLowerCase()) {
                 if (!taskDef[i].enabled) {
                     taskDef[i].enabled = true;
                     startTask(i);
@@ -68,6 +77,10 @@ class AsyncTaskHandler { constructor() {
                 return "Task '" + name + "' already enabled!";
             }
         }
+		if (name.toLowerCase() == "all") {
+			saveTaskDefinitions();
+			return "All tasks enabled!";
+		}
         return "No task with name " + name;
     }
     
@@ -107,7 +120,8 @@ class AsyncTaskHandler { constructor() {
             console.log("Thread for Task " + taskDef[taskId].name + " ready and running...");
             let now;
             let errorCount = 0;
-    	    while(taskDef[taskId].enabled && errorCount < MAX_TASK_ERROR_COUNT) {
+			let resetIterationAtStart = resetIteration;
+    	    while(resetIterationAtStart == resetIteration && taskDef[taskId].enabled && errorCount < MAX_TASK_ERROR_COUNT) {
     	        try {
                     now = Date.now();
                 	if (nextExecution<=now) {
@@ -123,9 +137,11 @@ class AsyncTaskHandler { constructor() {
                     errorCount++;
                 }
     	    }
-    	    if (errorCount < MAX_TASK_ERROR_COUNT) {
+    	    if (errorCount < MAX_TASK_ERROR_COUNT && resetIterationAtStart == resetIteration) {
                 console.log("Thread for Task " + taskDef[taskId].name + " stopped...");
-    	    } else {
+    	    } else if (errorCount < MAX_TASK_ERROR_COUNT) {
+				console.log("Thread for Task " + taskDef[taskId].name + " reset-stopped...");
+			} else {
     	        console.log("Task " + taskDef[taskId].name + " encountered too many errors and was stopped and disabled.");
     	        taskDef[taskId].enabled = false;
                 saveTaskDefinitions();
