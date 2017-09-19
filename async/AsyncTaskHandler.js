@@ -101,7 +101,7 @@ class AsyncTaskHandler { constructor() {
                 }
 	        break;
 	        case "SYNCED_DAY_INTERVAL":
-	            nextExecution = (new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), taskDef[taskId].hour, taskDef[taskId].minute, taskDef[taskId].second))).getTime();
+	            nextExecution = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), taskDef[taskId].hour, taskDef[taskId].minute, taskDef[taskId].second, 0);
 	            while (nextExecution < now) {
 	                nextExecution += taskDef[taskId].interval;
 	            }
