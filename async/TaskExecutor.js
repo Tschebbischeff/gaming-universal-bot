@@ -21,7 +21,7 @@ class TaskExecutor { constructor() {
         let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available && gamingUniversal.channels.has(config.getGuildWars2ChannelId())) {
             let channel = gamingUniversal.channels.get(config.getGuildWars2ChannelId());
-			let now = (new Date()).getTime();
+			let now = new Date();
             if (channel.type == "text") {
                 channel.send({embed: {
                         color: 16727070,
