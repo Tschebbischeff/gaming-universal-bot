@@ -21,10 +21,11 @@ class TaskExecutor { constructor() {
         let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available && gamingUniversal.channels.has(config.getGuildWars2ChannelId())) {
             let channel = gamingUniversal.channels.get(config.getGuildWars2ChannelId());
+			let now = (new Date()).getTime();
             if (channel.type == "text") {
                 channel.send({embed: {
                         color: 16727070,
-                        title: "Worldboss spawned!",
+                        title: "("+(now.getHours() < 10 ? "0" : "")+now.getHours()+":"+(now.getMinutes() < 10 ? "0" : "")+now.getMinutes()+") - Worldboss spawned!",
                         description: "A [worldboss-event]("+args.eventurl+") just started!",
                         fields: [{
                             name: "Who?",
