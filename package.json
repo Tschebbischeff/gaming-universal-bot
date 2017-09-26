@@ -3,14 +3,30 @@
   "version": "0.0.1",
   "description": "The official Discord bot of the Gaming Universal Server.",
   "main": "index.js",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tschebbischeff/gaming-universal-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "gaming-universal",
+    "gaming"
+  ],
   "author": "Tarek Chebbi <tarek.philipp.chebbi@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tschebbischeff/gaming-universal-bot/issues"
+  },
+  "homepage": "https://github.com/Tschebbischeff/gaming-universal-bot#readme",
   "dependencies": {
     "async": "~0.2.8",
+    "bufferutil": "^3.0.2",
+    "discord.js": "^11.2.1",
     "socket.io": "~0.9.14"
   },
   "engines": {
     "node": "7.10.1",
-	"npm": "4.2.0"
+    "npm": "4.2.0"
   }
 }

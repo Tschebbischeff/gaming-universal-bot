@@ -2,3 +2,7 @@ HerokuLogs.bat
 HerokuOff.bat
 HerokuOn.bat
 NodeExecute.bat
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
