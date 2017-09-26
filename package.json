@@ -23,7 +23,13 @@
     "async": "~0.2.8",
     "bufferutil": "^3.0.2",
     "discord.js": "^11.2.1",
-    "socket.io": "~0.9.14"
+    "erlpack": "github:hammerandchisel/erlpack",
+    "libsodium-wrappers": "^0.5.4",
+    "node-opus": "^0.2.6",
+    "opusscript": "0.0.3",
+    "socket.io": "~0.9.14",
+    "sodium": "^2.0.1",
+    "uws": "^0.14.5"
   },
   "engines": {
     "node": "7.10.1",
