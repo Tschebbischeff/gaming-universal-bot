@@ -23,10 +23,9 @@
     "async": "~0.2.8",
     "bufferutil": "^3.0.2",
     "erlpack": "github:hammerandchisel/erlpack",
+	"sodium": "^2.0.1",
     "libsodium-wrappers": "^0.5.4",
-    "node-opus": "^0.2.6",
     "opusscript": "0.0.3",
-    "sodium": "^2.0.1",
     "uws": "^0.14.5",
 	"socket.io": "~0.9.14",
 	"discord.js": "^11.2.1"
