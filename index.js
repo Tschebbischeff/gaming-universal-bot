@@ -8,7 +8,7 @@ const logger = require("./logger/Logger");
 
 client.on("ready", () => {
 	console.log("Gaming Universal Bot is ready!");
-	client.user.setGame(config.getPrefix() + 'help')
+	client.user.setActivity(config.getPrefix() + 'help', {"type": "LISTENING"})
 		.catch(function(err) {
 			console.log(err);
 		});
