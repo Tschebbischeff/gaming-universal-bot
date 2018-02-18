@@ -1,4 +1,4 @@
 /node_modules
-/saved
+/saved/*
 npm-debug.log
 .DS_Store
