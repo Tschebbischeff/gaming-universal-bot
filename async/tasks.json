@@ -32,7 +32,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_shadow_behemoth"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossFireElemental",
         "type": "SYNCED_DAY_INTERVAL",
@@ -48,7 +48,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Destroy_the_fire_elemental_created_from_chaotic_energy_fusing_with_the_C.L.E.A.N._5000%27s_energy_core"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossGreatJungleWurm",
         "type": "SYNCED_DAY_INTERVAL",
@@ -64,7 +64,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_great_jungle_wurm"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossTequatlTheSunless",
         "type": "SYNCED_DAY_INTERVAL",
@@ -80,7 +80,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_Tequatl_the_Sunless"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossInquestGolemMarkII",
         "type": "SYNCED_DAY_INTERVAL",
@@ -96,7 +96,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_Inquest%27s_golem_Mark_II"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossClawOfJormag",
         "type": "SYNCED_DAY_INTERVAL",
@@ -112,7 +112,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_the_Claw_of_Jormag"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossAdmiralTaidhaCovington",
         "type": "SYNCED_DAY_INTERVAL",
@@ -128,7 +128,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Kill_Admiral_Taidha_Covington"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossSvanirShaman",
         "type": "SYNCED_DAY_INTERVAL",
@@ -144,7 +144,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Kill_the_Svanir_shaman_chief_to_break_his_control_over_the_ice_elemental"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossUlgothTheModniir",
         "type": "SYNCED_DAY_INTERVAL",
@@ -160,7 +160,7 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Defeat_Ulgoth_the_Modniir_and_his_minions"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     },{
         "name": "GWBossMegadestroyer",
         "type": "SYNCED_DAY_INTERVAL",
@@ -176,6 +176,6 @@
             "eventurl": "https://wiki.guildwars2.com/wiki/Kill_the_megadestroyer_before_it_blows_everyone_up"
         },
         "lastExecution": 0,
-        "enabled": true
+        "enabled": false
     }
 ]
