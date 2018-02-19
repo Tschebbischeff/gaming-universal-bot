@@ -2,8 +2,8 @@
 
 echo 'Automatic updates from current Git branch enabled!'
 
-pIdNode = $1
-pIdLiveShell = $2
+pIdNode=$1
+pIdLiveShell=$2
 updateNeeded=false
 
 ls -l
@@ -23,9 +23,9 @@ done
 echo 'Terminating current node session...'
 kill -TERM $pIdNode
 echo 'Copying update script...'
-if [ -f /../saved/git-perform-update.sh ]; then
-    rm /../saved/git-perform-update.sh
+if [ -f /saved/git-perform-update.sh ]; then
+    rm /saved/git-perform-update.sh
 fi
-cp /git-perform-update.sh /../saved/git-perform-update.sh
+cp /scripts/git-perform-update.sh /saved/git-perform-update.sh
 echo 'Killing Live Shell...'
 kill -KILL $pIdLiveShell
