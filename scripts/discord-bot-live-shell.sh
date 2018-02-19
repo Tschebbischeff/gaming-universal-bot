@@ -9,6 +9,7 @@ while ! $terminate; do
 	if [ "$cmd" == "exit" ]; then
 		terminate=true
 	else
+		sleep 1
 		#Send to discord bot?
 	fi
 done

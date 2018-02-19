@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -m
+echo '=== Gaming Universal Bot: Linux Continous Running and Updating Tool ==='
 if [ -f /saved/git-perform-update.sh ]; then
     rm /saved/git-perform-update.sh
 fi
@@ -25,6 +26,9 @@ if [ ! -f /saved/git-perform-update.sh ]; then
 else
     exec ./saved/git-perform-update.sh
 fi
-$!
+wait $pIdNode > /dev/null
+wait $pIdUpdateChecker > /dev/null
+echo 'OK?'
 jobs
+echo '?KO'
 exit 0
