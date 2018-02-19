@@ -6,10 +6,14 @@ pIdNode=$1
 pIdLiveShell=$2
 updateNeeded=false
 
-ls -l
+sh ./scripts/git-check-status.sh
+rc=$?
+echo 'check status result:'
+echo $rc
 exit 0
+
 while ! $updateNeeded; do
-    sh ./git-check-status.sh
+    sh ./scripts/git-check-status.sh
 	rc=$?
 	if [ $rc -eq 1 ]
 	then

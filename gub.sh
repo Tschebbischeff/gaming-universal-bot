@@ -5,12 +5,13 @@ if [ -f /saved/git-perform-update.sh ]; then
 fi
 node --trace-warnings --trace-deprecation index.js &
 sh ./scripts/discord-bot-live-shell.sh &
-kill -STOP %2
-#pIdNode = $(jobs -p | sed '1!d')
-#pIdLiveShell = $(jobs -p | sed '2!d')
-sh ./scripts/git-update-checker.sh %1 %2 &
+pIdNode=$(jobs -p | sed '1!d')
+pIdLiveShell=$(jobs -p | sed '2!d')
+kill -STOP $pIdLiveShell
+sh ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
 sleep 10
-kill -CONT %2
+echo '=== Live shell ==='
+kill -CONT $pIdLiveShell
 %2
 echo 'Live Shell terminated, checking for update-script'
 if [ ! -f /saved/git-perform-update.sh ]; then
