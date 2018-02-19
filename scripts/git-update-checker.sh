@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -m
 echo 'Automatic updates from current Git branch enabled!'
 
 pIdNode=$1

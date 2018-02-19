@@ -19,9 +19,9 @@ fg %2 > /dev/null
 echo 'Live Shell terminated, checking for update-script...'
 if [ ! -f /saved/git-perform-update.sh ]; then
     echo 'Live Shell was terminated by user'
-    kill -n 15 $pIdNode
+    kill -n 15 $pIdNode > /dev/null
 	echo 'Node terminated'
-    kill -n 15 $pIdUpdateChecker
+    kill -n 15 $pIdUpdateChecker > /dev/null
 	echo 'Automatic updater terminated'
 else
     exec ./saved/git-perform-update.sh
