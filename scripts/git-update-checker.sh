@@ -21,11 +21,11 @@ done
 
 #Update needed, terminate node and live shell and copy git update script
 echo 'Terminating current node session...'
-kill -15 $pIdNode
+kill -n -15 $pIdNode
 echo 'Copying update script...'
 if [ -f /saved/git-perform-update.sh ]; then
     rm /saved/git-perform-update.sh
 fi
 cp /scripts/git-perform-update.sh /saved/git-perform-update.sh
 echo 'Killing Live Shell...'
-kill -9 $pIdLiveShell
+kill -n -9 $pIdLiveShell
