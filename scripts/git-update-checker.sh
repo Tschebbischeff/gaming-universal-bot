@@ -6,6 +6,8 @@ pIdNode = $1
 pIdLiveShell = $2
 updateNeeded=false
 
+ls -l
+exit 0
 while ! $updateNeeded; do
     sh ./git-check-status.sh
 	rc=$?

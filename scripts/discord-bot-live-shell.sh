@@ -5,3 +5,4 @@ echo 'This file is a stub!' #, you can write commands, but they will not affect 
 while true; do
     sleep 20
 done
+exit 0
