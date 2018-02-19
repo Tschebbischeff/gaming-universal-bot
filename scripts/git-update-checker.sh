@@ -6,14 +6,11 @@ pIdNode=$1
 pIdLiveShell=$2
 updateNeeded=false
 
-exit 0
-
 while ! $updateNeeded; do
     sh ./scripts/git-check-status.sh
 	rc=$?
-	if [ $rc -eq 1 ]
-	then
-	echo 'Found update on Git...'
+	if [ $rc -eq 1 ]; then
+	    echo 'Found update on Git...'
 	    updateNeeded=true
 	fi
 	sleep 5
