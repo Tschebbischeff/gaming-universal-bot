@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git remote update
+git remote update > /dev/null
 
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
