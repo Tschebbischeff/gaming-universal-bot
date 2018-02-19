@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -m
 if [ -f /saved/git-perform-update.sh ]; then
     rm /saved/git-perform-update.sh
 fi
