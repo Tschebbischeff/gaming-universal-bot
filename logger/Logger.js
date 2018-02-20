@@ -167,12 +167,13 @@ class Logger { constructor() {
 				if (validGuild.available && validGuild.channels.has(channelId)) {
 					let channel = validGuild.channels.get(channelId);
 					if (channel.type == "text") {
+						logger = this;
 						channel.fetchMessages()
 						.then(function(msgs) {
 							if (msgs.has(messageId)) {
 								let message = msgs.get(messageId);
 								if (message.editable) {
-									message.edit(this.compileLogPage(1))
+									message.edit(logger.compileLogPage(1))
 									.then(function(msg) {
 										updatingLogMessage = false;
 									}).catch(function(err) {
