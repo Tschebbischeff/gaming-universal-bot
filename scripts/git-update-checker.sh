@@ -8,7 +8,7 @@ updateNeeded=false
 terminate=false
 
 while ! $terminate; do
-    sh ./scripts/git-check-status.sh
+    sh ./scripts/git-check-status.sh > /dev/null
 	rc=$?
 	if [ $rc -eq 1 ]; then
 	    echo 'Found update on Git...'
