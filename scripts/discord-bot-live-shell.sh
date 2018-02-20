@@ -1,9 +1,10 @@
 #!/bin/bash
 
-terminate=false
 sleep 1
 
-echo 'This file is a stub! You can write commands, but they will not affect anything!'
+terminate=false
+echo 'You may issue bot commands in this shell directly.'
+echo 'Type exit to terminate the bot gracefully.'
 while ! $terminate; do
     read cmd
 	if [ "$cmd" = "exit" ]; then

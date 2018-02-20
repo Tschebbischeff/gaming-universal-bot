@@ -12,10 +12,22 @@ pIdLiveShell=$(jobs -p | sed '2!d')
 kill -n 19 $pIdLiveShell #SIGSTOP
 bash ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
 pIdUpdateChecker=$(jobs -p | sed '3!d')
-sleep 10
+
+terminate=false
+echo 'Waiting for bot to get ready ...'
+while ! $terminate; do
+	if [ -f ./saved/botState ]; then
+		state=$(cat ./saved/botState | sed '1!d')
+		if [ "$state" = "READY" ]; then
+			$terminate=true
+		fi
+	fi
+done
+echo 'Bot is ready.'
 echo '=== Live shell ==='
 kill -n 18 $pIdLiveShell #SIGCONT
 fg %2 > /dev/null
+
 echo 'Live Shell terminated, checking for update-script...'
 if [ ! -f ./saved/git-perform-update.sh ]; then
     echo 'Live Shell was terminated by user'
@@ -26,6 +38,7 @@ if [ ! -f ./saved/git-perform-update.sh ]; then
 else
     exec ./saved/git-perform-update.sh
 fi
+
 wait $pIdNode
 wait $pIdUpdateChecker
 sleep 2
