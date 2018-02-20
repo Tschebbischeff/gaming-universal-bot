@@ -1,5 +1,6 @@
 #!/bin/bash
 
+##Setting up session
 set -m
 echo '========== Gaming Universal Bot: Linux Continous Running and Updating Tool =========='
 if [ -f ./saved/git-perform-update.sh ]; then
@@ -9,6 +10,7 @@ if [ -f ./saved/botState ]; then
     rm ./saved/botState
 fi
 
+##Starting services
 node --trace-warnings --trace-deprecation index.js &
 pIdNode=$(jobs -p | sed '1!d')
 bash ./scripts/discord-bot-live-shell.sh &
@@ -17,6 +19,7 @@ kill -n 19 $pIdLiveShell #SIGSTOP
 bash ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
 pIdUpdateChecker=$(jobs -p | sed '3!d')
 
+##Waiting for node.js bot
 terminate=false
 echo 'Waiting for bot to get ready ...'
 while ! $terminate; do
@@ -27,11 +30,11 @@ while ! $terminate; do
 		fi
 	fi
 done
-echo 'Bot is ready.'
 echo '=== Live shell ==='
 kill -n 18 $pIdLiveShell #SIGCONT
 fg %2 > /dev/null
 
+##Reacting to termination
 echo 'Live Shell terminated, checking update-script ...'
 if [ ! -f ./saved/git-perform-update.sh ]; then
     echo 'Live Shell was terminated by user, cleaning up ...'
@@ -44,5 +47,4 @@ if [ ! -f ./saved/git-perform-update.sh ]; then
 else
     exec ./saved/git-perform-update.sh
 fi
-
 exit 0

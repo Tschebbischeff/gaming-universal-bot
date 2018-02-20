@@ -1,12 +1,13 @@
 #!/bin/bash
 
+##Setting up session
 echo 'Starting updater. Listening for changes on current Git branch!'
-
 pIdNode=$1
 pIdLiveShell=$2
 updateNeeded=false
 terminate=false
 
+##Listening for updates on remote
 while ! $terminate; do
     bash ./scripts/git-check-status.sh &> /dev/null
 	rc=$?
@@ -21,6 +22,7 @@ while ! $terminate; do
 	sleep 5
 done
 
+##Reacting to update on remote
 if $updateNeeded; then
 	#Update needed, terminate node and live shell and copy git update script
 	echo 'Terminating current node session...'
