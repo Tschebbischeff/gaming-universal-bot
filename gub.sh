@@ -19,7 +19,7 @@ while ! $terminate; do
 	if [ -f ./saved/botState ]; then
 		state=$(cat ./saved/botState | sed '1!d')
 		if [ "$state" = "READY" ]; then
-			$terminate=true
+			terminate=true
 		fi
 	fi
 done
