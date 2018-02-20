@@ -212,7 +212,7 @@ class CommandExecutor { constructor() {
 		if (!isNaN(args[0])) {
 			let pageNumber = parseInt(args[0]);
 			if (pageNumber > 0) {
-				handleResult(message, logger.compileLogPage(pageNumber));
+				handleResult(message, logger.getLogPage(pageNumber));
 			} else {
 				handleResult(message, "Please specify a page number above zero!");
 			}

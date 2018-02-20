@@ -50,7 +50,7 @@ class Logger { constructor() {
 		return message == "" ? "" : "```html\n" + message + "\n```";
 	}*/
 	
-	this.compileLogPage = function(page) {
+	let compileLogPage = function(page) {
 		let message = "";
 		let currentPage = 0;
 		let pageLineBegin = log.length-1;
@@ -71,6 +71,10 @@ class Logger { constructor() {
 			message = "There is no page number " + page + "!";
 		}
 		return message == "" ? "" : "```html\n" + message + "\n```";
+	}
+	
+	this.getLogPage = function(page) {
+		return compileLogPage(page);
 	}
 	
 	this.reset = function() {
@@ -96,7 +100,7 @@ class Logger { constructor() {
 	}
 	
 	let sendLogMessage = function(channel) {
-		let message = this.compileLogPage(1);
+		let message = compileLogPage(1);
 		if (message != "") {
 			channel.send(message)
 			.then(function(msg) {
@@ -168,13 +172,12 @@ class Logger { constructor() {
 				if (validGuild.available && validGuild.channels.has(channelId)) {
 					let channel = validGuild.channels.get(channelId);
 					if (channel.type == "text") {
-						let logger = this;
 						channel.fetchMessages()
 						.then(function(msgs) {
 							if (msgs.has(messageId)) {
 								let message = msgs.get(messageId);
 								if (message.editable) {
-									message.edit(logger.compileLogPage(1))
+									message.edit(compileLogPage(1))
 									.then(function(msg) {
 										updatingLogMessage = false;
 									}).catch(function(err) {
