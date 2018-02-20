@@ -68,7 +68,7 @@ class Logger { constructor() {
 			}
 		}
 		if (currentPage < page && page > 1) {
-			message = "There is no page number " + page + "!";
+			return "There is no page number " + page + "!";
 		}
 		return message == "" ? "" : "```html\n" + message + "\n```";
 	}
