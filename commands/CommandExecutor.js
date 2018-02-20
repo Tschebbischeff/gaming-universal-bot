@@ -210,7 +210,7 @@ class CommandExecutor { constructor() {
 	this.commandLogsShow = function(message, preCommand, command, args) {
 		if (args.length > 0) {
 		if (!isNaN(args[0])) {
-			pageNumber = parseInt(args[0]);
+			let pageNumber = parseInt(args[0]);
 			if (pageNumber > 0) {
 				handleResult(message, logger.compileLogPage(pageNumber));
 			} else {
