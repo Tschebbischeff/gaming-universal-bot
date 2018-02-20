@@ -2,8 +2,8 @@
 
 set -m
 echo '=== Gaming Universal Bot: Linux Continous Running and Updating Tool ==='
-if [ -f /saved/git-perform-update.sh ]; then
-    rm /saved/git-perform-update.sh
+if [ -f ./saved/git-perform-update.sh ]; then
+    rm ./saved/git-perform-update.sh
 fi
 node --trace-warnings --trace-deprecation index.js &
 pIdNode=$(jobs -p | sed '1!d')
@@ -17,7 +17,7 @@ echo '=== Live shell ==='
 kill -n 18 $pIdLiveShell #SIGCONT
 fg %2 > /dev/null
 echo 'Live Shell terminated, checking for update-script...'
-if [ ! -f /saved/git-perform-update.sh ]; then
+if [ ! -f ./saved/git-perform-update.sh ]; then
     echo 'Live Shell was terminated by user'
     kill -n 15 $pIdNode > /dev/null
 	echo 'Node terminated'
@@ -28,7 +28,4 @@ else
 fi
 wait $pIdNode > /dev/null
 wait $pIdUpdateChecker > /dev/null
-echo 'OK?'
-jobs
-echo '?KO'
 exit 0
