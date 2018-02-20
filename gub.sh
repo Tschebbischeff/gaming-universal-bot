@@ -45,6 +45,7 @@ if [ ! -f ./saved/git-perform-update.sh ]; then
 	wait $pIdUpdateChecker 2> /dev/null
 	echo 'Automatic updater terminated'
 else
+	echo 'Update-script found, replacing execution ...'
     exec ./saved/git-perform-update.sh
 fi
 exit 0
