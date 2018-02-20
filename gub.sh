@@ -15,7 +15,7 @@ pIdUpdateChecker=$(jobs -p | sed '3!d')
 sleep 10
 echo '=== Live shell ==='
 kill -n 18 $pIdLiveShell #SIGCONT
-fg %2 &> /dev/null
+fg %2 > /dev/null
 echo 'Live Shell terminated, checking for update-script...'
 if [ ! -f ./saved/git-perform-update.sh ]; then
     echo 'Live Shell was terminated by user'
@@ -29,4 +29,4 @@ fi
 wait $pIdNode
 wait $pIdUpdateChecker
 sleep 2
-exit 0
+exit 0 &> /dev/null
