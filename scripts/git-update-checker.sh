@@ -25,6 +25,7 @@ if $updateNeeded; then
 	#Update needed, terminate node and live shell and copy git update script
 	echo 'Terminating current node session...'
 	kill -n 15 $pIdNode
+	wait $pIdNode 2> /dev/null
 	echo 'Copying update script...'
 	if [ -f ./saved/git-perform-update.sh ]; then
 		rm ./saved/git-perform-update.sh
@@ -32,6 +33,7 @@ if $updateNeeded; then
 	cp ./scripts/git-perform-update.sh ./saved/git-perform-update.sh
 	echo 'Killing Live Shell...'
 	kill -n 9 $pIdLiveShell
+	wait $pIdLiveShell 2> /dev/null
 else
 	echo 'Terminating updater, due to diverging update!'
 fi

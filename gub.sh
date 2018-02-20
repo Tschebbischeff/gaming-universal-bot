@@ -5,6 +5,10 @@ echo '========== Gaming Universal Bot: Linux Continous Running and Updating Tool
 if [ -f ./saved/git-perform-update.sh ]; then
     rm ./saved/git-perform-update.sh
 fi
+if [ -f ./saved/botState ]; then
+    rm ./saved/botState
+fi
+
 node --trace-warnings --trace-deprecation index.js &
 pIdNode=$(jobs -p | sed '1!d')
 bash ./scripts/discord-bot-live-shell.sh &
@@ -28,18 +32,17 @@ echo '=== Live shell ==='
 kill -n 18 $pIdLiveShell #SIGCONT
 fg %2 > /dev/null
 
-echo 'Live Shell terminated, checking for update-script...'
+echo 'Live Shell terminated, checking update-script ...'
 if [ ! -f ./saved/git-perform-update.sh ]; then
-    echo 'Live Shell was terminated by user'
-    kill -n 15 $pIdNode &> /dev/null
+    echo 'Live Shell was terminated by user, cleaning up ...'
+    kill -n 15 $pIdNode
+	wait $pIdNode 2> /dev/null
 	echo 'Node terminated'
-    kill -n 15 $pIdUpdateChecker &> /dev/null
+    kill -n 15 $pIdUpdateChecker
+	wait $pIdUpdateChecker 2> /dev/null
 	echo 'Automatic updater terminated'
 else
     exec ./saved/git-perform-update.sh
 fi
 
-wait $pIdNode
-wait $pIdUpdateChecker
-sleep 2
-exit 0 &> /dev/null
+exit 0
