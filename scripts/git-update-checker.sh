@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'Automatic updates from current Git branch enabled!'
+echo 'Starting updater. Listening for changes on current Git branch!'
 
 pIdNode=$1
 pIdLiveShell=$2
