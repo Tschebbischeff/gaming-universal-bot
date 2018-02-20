@@ -2,7 +2,7 @@
 
 ##Setting up session
 set -m
-echo '========== Gaming Universal Bot: Linux Continous Running and Updating Tool =========='
+echo '========== Gaming Universal Bot ===== Linux Continous Running and Updating Tool =========='
 if [ -f ./saved/git-perform-update.sh ]; then
     rm ./saved/git-perform-update.sh
 fi
