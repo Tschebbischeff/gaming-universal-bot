@@ -67,7 +67,7 @@
 	"logs show": {
 		"type": "channel",
 		"short": "Shows log messages.",
-		"long": "__Usage: logs show <PageNumber|DateAndTime>__\nShow as many log entries as possible.\nTHIS FUNCTION IS NOT IMPLEMENTED YET!"
+		"long": "__Usage: logs show <PageNumber>__\nShow as many log entries as possible, going back in time with increasing page number!\nPage one is always shown in the server log channel."
 	},
 	"print": {
 		"type": "channel",

@@ -5,7 +5,7 @@ class Logger { constructor() {
 	const discordClient = require("./../DiscordClient");
 	const config = require("./../config/Config");
 	const gubLib = require("./../GUBLib");
-	const MAX_LOG_LENGTH = 250;
+	const MAX_LOG_LENGTH = 2500;
 	const DISCORD_CHARACTER_LIMIT = 2000;
 	
 	let needsUpdating = true;
@@ -37,7 +37,7 @@ class Logger { constructor() {
 		}
 	}
 	
-	let compileLogMessage = function() {
+	/*let compileLogMessage = function() {
 		let message = "";
 		let line;
 		for (let i = log.length-1; i >= 0; i--) {
@@ -46,6 +46,28 @@ class Logger { constructor() {
 				break;
 			}
 			message = "\n" + line + message;
+		}
+		return message == "" ? "" : "```html\n" + message + "\n```";
+	}*/
+	
+	this.compileLogPage = function(page) {
+		let currentPage = 0;
+		let pageLineBegin = log.length-1;
+		while (currentPage < page && pageLineBegin > 0) {
+			let message = "";
+			let line;
+			currentPage++;
+			for (let i = pageLineBegin; i >= 0; i--) {
+				pageLineBegin = i;
+				line = compileLogLine(i);
+				if (message.length + line.length > (DISCORD_CHARACTER_LIMIT - 20)) {
+					break;
+				}
+				message = "\n" + line + message;
+			}
+		}
+		if (currentPage < page && page > 1) {
+			message = "There is no page number " + page + "!";
 		}
 		return message == "" ? "" : "```html\n" + message + "\n```";
 	}
@@ -73,7 +95,7 @@ class Logger { constructor() {
 	}
 	
 	let sendLogMessage = function(channel) {
-		let message = compileLogMessage();
+		let message = this.compileLogPage(1);
 		if (message != "") {
 			channel.send(message)
 			.then(function(msg) {
@@ -150,7 +172,7 @@ class Logger { constructor() {
 							if (msgs.has(messageId)) {
 								let message = msgs.get(messageId);
 								if (message.editable) {
-									message.edit(compileLogMessage())
+									message.edit(this.compileLogPage(1))
 									.then(function(msg) {
 										updatingLogMessage = false;
 									}).catch(function(err) {

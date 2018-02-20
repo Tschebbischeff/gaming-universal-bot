@@ -208,7 +208,20 @@ class CommandExecutor { constructor() {
 	}
 	
 	this.commandLogsShow = function(message, preCommand, command, args) {
-		handleResult(message, "Sorry, I am a stupid bot and don't know how to do that yet..." + preCommand + "|" + command + "|" + args.toString());
+		if (args.length > 0) {
+		if (!isNaN(args[0])) {
+			pageNumber = parseInt(args[0]);
+			if (pageNumber > 0) {
+				handleResult(message, logger.compileLogPage(pageNumber));
+			} else {
+				handleResult(message, "Please specify a page number above zero!");
+			}
+		} else {
+			handleResult(message, "Sorry, the argument \"" + args[0] + "\" is not a number!");
+		}
+		} else {
+			handleResult(message, "You need to supply a page number!");
+		}
 	}
     
     this.commandPrintTasks = function(message, preCommand, command, args) {
