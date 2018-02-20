@@ -20,8 +20,8 @@ bash ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
 pIdUpdateChecker=$(jobs -p | sed '3!d')
 
 ##Waiting for node.js bot
+echo '=== Bot initialization ==='
 terminate=false
-echo 'Waiting for bot to get ready ...'
 while ! $terminate; do
 	if [ -f ./saved/botState ]; then
 		state=$(cat ./saved/botState | sed '1!d')

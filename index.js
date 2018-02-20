@@ -20,13 +20,13 @@ let setState = function(state) {
 setState("INIT");
 
 client.on("ready", () => {
-	console.log("Gaming Universal Bot is ready!");
 	client.user.setActivity(config.getPrefix() + 'help', {"type": "LISTENING"})
 		.catch(function(err) {
 			console.log(err);
 		});
 	asyncTaskHandler.startTasks();
 	logger.registerCallbacks();
+	console.log("Gaming Universal Bot is ready!");
 	setState("READY");
 });
 
