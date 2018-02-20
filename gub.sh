@@ -7,10 +7,10 @@ if [ -f ./saved/git-perform-update.sh ]; then
 fi
 node --trace-warnings --trace-deprecation index.js &
 pIdNode=$(jobs -p | sed '1!d')
-sh ./scripts/discord-bot-live-shell.sh &
+bash ./scripts/discord-bot-live-shell.sh &
 pIdLiveShell=$(jobs -p | sed '2!d')
 kill -n 19 $pIdLiveShell #SIGSTOP
-sh ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
+bash ./scripts/git-update-checker.sh $pIdNode $pIdLiveShell &
 pIdUpdateChecker=$(jobs -p | sed '3!d')
 sleep 10
 echo '=== Live shell ==='
