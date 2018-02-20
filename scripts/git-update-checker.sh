@@ -34,7 +34,7 @@ if $updateNeeded; then
 	fi
 	cp ./scripts/git-perform-update.sh ./saved/git-perform-update.sh
 	echo 'Killing Live Shell...'
-	kill -n 9 $pIdLiveShell
+	kill -n 15 $pIdLiveShell
 	wait $pIdLiveShell 2> /dev/null
 else
 	echo 'Terminating updater, due to diverging update!'
