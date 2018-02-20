@@ -208,7 +208,7 @@ class CommandExecutor { constructor() {
 	}
 	
 	this.commandLogsShow = function(message, preCommand, command, args) {
-		handleResult(message, "Sorry, I am a stupid bot and don't know how to do that yet...");
+		handleResult(message, "Sorry, I am a stupid bot and don't know how to do that yet..." + preCommand + "|" + command + "|" + args.toString());
 	}
     
     this.commandPrintTasks = function(message, preCommand, command, args) {
