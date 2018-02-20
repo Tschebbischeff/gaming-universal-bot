@@ -51,11 +51,12 @@ class Logger { constructor() {
 	}*/
 	
 	this.compileLogPage = function(page) {
+		let message = "";
 		let currentPage = 0;
 		let pageLineBegin = log.length-1;
 		while (currentPage < page && pageLineBegin > 0) {
-			let message = "";
-			let line;
+			let line = "";
+			message = "";
 			currentPage++;
 			for (let i = pageLineBegin; i >= 0; i--) {
 				pageLineBegin = i;
