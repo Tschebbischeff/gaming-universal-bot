@@ -167,7 +167,7 @@ class Logger { constructor() {
 				if (validGuild.available && validGuild.channels.has(channelId)) {
 					let channel = validGuild.channels.get(channelId);
 					if (channel.type == "text") {
-						logger = this;
+						let logger = this;
 						channel.fetchMessages()
 						.then(function(msgs) {
 							if (msgs.has(messageId)) {
