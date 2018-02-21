@@ -74,7 +74,7 @@ class Logger { constructor() {
 	this.write = function(msg) {
 		let now = new Date();
 		if (log.length == 0 || ((new Date()).getDate() != (new Date(log[log.length-1].timestamp)).getDate())) {
-			log.push({message: "### "+(now.getDate() < 10 ? "0" : "")+now.getDate()+"."+(now.getMonth() < 9 ? "0" : "")+(now.getMonth()+1)+"."+now.getFullYear()+" ###"});
+			log.push({message: "#!"+(now.getDate() < 10 ? "0" : "")+now.getDate()+"."+(now.getMonth() < 9 ? "0" : "")+(now.getMonth()+1)+"."+now.getFullYear()+"!#"});
 		}
 		let eventObj = {timestamp: now.getTime(), message: msg};
 		log.push(eventObj);
