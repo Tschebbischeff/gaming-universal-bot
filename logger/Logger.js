@@ -57,7 +57,7 @@ class Logger { constructor() {
 		if (currentPage < page && page > 1) {
 			return "There is no page number " + page + "!";
 		}
-		return message == "" ? "" : "```c#\n" + message + "\n```";
+		return message == "" ? "" : "```cs\n" + message + "\n```";
 	}
 	
 	this.getLogPage = function(page) {
