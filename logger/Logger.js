@@ -31,7 +31,7 @@ class Logger { constructor() {
 	let compileLogLine = function(index) {
 		if (log[index].timestamp) {
 			let ts = new Date(log[index].timestamp);
-			return "<" + (ts.getHours() < 10 ? "0" : "")+ts.getHours()+":"+(ts.getMinutes() < 10 ? "0" : "")+ts.getMinutes()+":"+(ts.getSeconds() < 10 ? "0" : "")+ts.getSeconds() + ">: " + log[index].message;
+			return "'" + (ts.getHours() < 10 ? "0" : "")+ts.getHours()+":"+(ts.getMinutes() < 10 ? "0" : "")+ts.getMinutes()+":"+(ts.getSeconds() < 10 ? "0" : "")+ts.getSeconds() + "': " + log[index].message;
 		} else {
 			return log[index].message;
 		}
@@ -74,7 +74,7 @@ class Logger { constructor() {
 	this.write = function(msg) {
 		let now = new Date();
 		if (log.length == 0 || ((new Date()).getDate() != (new Date(log[log.length-1].timestamp)).getDate())) {
-			log.push({message: "#!"+(now.getDate() < 10 ? "0" : "")+now.getDate()+"."+(now.getMonth() < 9 ? "0" : "")+(now.getMonth()+1)+"."+now.getFullYear()+"!#"});
+			log.push({message: "### "+(now.getDate() < 10 ? "0" : "")+now.getDate()+"."+(now.getMonth() < 9 ? "0" : "")+(now.getMonth()+1)+"."+now.getFullYear()+" ###"});
 		}
 		let eventObj = {timestamp: now.getTime(), message: msg};
 		log.push(eventObj);
