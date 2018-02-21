@@ -37,19 +37,6 @@ class Logger { constructor() {
 		}
 	}
 	
-	/*let compileLogMessage = function() {
-		let message = "";
-		let line;
-		for (let i = log.length-1; i >= 0; i--) {
-			line = compileLogLine(i);
-			if (message.length + line.length > (DISCORD_CHARACTER_LIMIT - 20)) {
-				break;
-			}
-			message = "\n" + line + message;
-		}
-		return message == "" ? "" : "```html\n" + message + "\n```";
-	}*/
-	
 	let compileLogPage = function(page) {
 		let message = "";
 		let currentPage = 0;
@@ -70,7 +57,7 @@ class Logger { constructor() {
 		if (currentPage < page && page > 1) {
 			return "There is no page number " + page + "!";
 		}
-		return message == "" ? "" : "```html\n" + message + "\n```";
+		return message == "" ? "" : "```bash\n" + message + "\n```";
 	}
 	
 	this.getLogPage = function(page) {
