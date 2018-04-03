@@ -45,7 +45,17 @@ if [ ! -f ./saved/git-perform-update.sh ]; then
 	wait $pIdUpdateChecker 2> /dev/null
 	echo 'Automatic updater terminated'
 else
-	echo 'Update-script found, executing ...'
+	echo 'Update-script found...'
+	echo 'Terminating current node session...'
+	kill -n 15 $pIdNode
+	wait $pIdNode 2> /dev/null
+	echo 'Terminating Live Shell...'
+	kill -n 15 $pIdLiveShell
+	wait $pIdLiveShell 2> /dev/null
+	echo 'Terminating automatic updater...'
+    kill -n 15 $pIdUpdateChecker
+	wait $pIdUpdateChecker 2> /dev/null
+	echo 'Executing update-script...'
     exec ./saved/git-perform-update.sh
 fi
 exit 0
