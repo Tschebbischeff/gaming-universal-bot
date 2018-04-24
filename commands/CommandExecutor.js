@@ -48,7 +48,7 @@ class CommandExecutor { constructor() {
 		let helpMessage = {embed: {color: 4359924, title: "__Help for command: \"" + concatCommandChain(preCommand, command) + "\"__", type: "rich"}};
 		let helpOutputType = "channel";
 		let commandDef = getCommandDefinition(concatCommandChain(preCommand, command).split(" "), commandDefinitions);
-		if (commandDef == null) {
+		if (commandDef == null || (commandDef.hasOwnProperty("hidden") && commandDef["hidden"] === true)) {
 			helpMessage.embed.description = "This command does not exist.";
 		} else {
 			let mainHelpDefinition = getHelpDefinition(preCommand, command);
@@ -61,14 +61,15 @@ class CommandExecutor { constructor() {
 			if (preCommand == "" && command == "help") {
 				let fieldsValue = "";
 				for (let i = 0; i < commandDefinitions.length; i++) {
-					fieldsValue += (fieldsValue == "" ? "" : "\n") + "*__"+commandDefinitions[i].command+"__*";
-					let subHelpDefinition = getHelpDefinition("", commandDefinitions[i].command);
-					if (subHelpDefinition == null) {
-						fieldsValue += "\n\tNo description available.";
-					} else {
-						fieldsValue += "\n\t"+subHelpDefinition.short.replace("\n", "\n\t");
-					}
-
+                    let subHelpDefinition = getHelpDefinition("", commandDefinitions[i].command);
+                    if (!subHelpDefinition.hasOwnProperty("hidden") || subHelpDefinition["hidden"] !== true) {
+    					fieldsValue += (fieldsValue == "" ? "" : "\n") + "*__"+commandDefinitions[i].command+"__*";
+    					if (subHelpDefinition == null) {
+    						fieldsValue += "\n\tNo description available.";
+    					} else {
+    						fieldsValue += "\n\t"+subHelpDefinition.short.replace("\n", "\n\t");
+    					}
+                    }
 				}
 				helpMessage.embed.fields = [{name: "Commands:", value: fieldsValue}];
 			} else {

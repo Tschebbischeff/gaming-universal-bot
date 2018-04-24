@@ -29,7 +29,7 @@
 		{"command": "start", "function": "commandArkStart"},
 		{"command": "stop", "function": "commandArkStop"}
 	]},
-	{"command": "fuck", "subcommands": [
-		{"command": "you", "function": "commandFuckYou"}
+	{"command": "fuck", "hidden": true, "subcommands": [
+		{"command": "you", "hidden": true, "function": "commandFuckYou"}
 	]}
 ]
