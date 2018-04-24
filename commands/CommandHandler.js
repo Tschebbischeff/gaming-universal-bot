@@ -39,6 +39,9 @@ class CommandHandler { constructor() {
                 if (commandExecutor.hasOwnProperty(commandDef[i].function)) {
                     commandExecutor[commandDef[i].function](message, preCommand, command, args);
                 } else {
+					if (commandDef[i].hasOwnProperty("hidden") && commandDef[i]["hidden"] === true) {
+						continue;
+					}
 					commandExecutor.commandHelp(message, preCommand, command, args);
                 }
                 return "";
