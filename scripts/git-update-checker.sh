@@ -30,7 +30,7 @@ if $updateNeeded; then
 		rm ./saved/git-perform-update.sh
 	fi
 	cp ./scripts/git-perform-update.sh ./saved/git-perform-update.sh
-	while true do
+	while true; do
 		#Waiting for termination through main script
 		sleep 5
 	done
