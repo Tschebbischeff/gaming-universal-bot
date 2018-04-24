@@ -61,9 +61,9 @@ class CommandExecutor { constructor() {
 			if (preCommand == "" && command == "help") {
 				let fieldsValue = "";
 				for (let i = 0; i < commandDefinitions.length; i++) {
-                    let subHelpDefinition = getHelpDefinition("", commandDefinitions[i].command);
-                    if (subHelpDefinition == null || !subHelpDefinition.hasOwnProperty("hidden") || subHelpDefinition["hidden"] !== true) {
+                    if (!commandDefinitions[i].hasOwnProperty("hidden") || commandDefinitions[i]["hidden"] !== true) {
     					fieldsValue += (fieldsValue == "" ? "" : "\n") + "*__"+commandDefinitions[i].command+"__*";
+                        let subHelpDefinition = getHelpDefinition("", commandDefinitions[i].command);
     					if (subHelpDefinition == null) {
     						fieldsValue += "\n\tNo description available.";
     					} else {
