@@ -49,9 +49,6 @@ else
 	echo 'Terminating current node session...'
 	kill -n 15 $pIdNode
 	wait $pIdNode 2> /dev/null
-	echo 'Terminating Live Shell...'
-	kill -n 15 $pIdLiveShell
-	wait $pIdLiveShell 2> /dev/null
 	echo 'Terminating automatic updater...'
     kill -n 15 $pIdUpdateChecker
 	wait $pIdUpdateChecker 2> /dev/null
