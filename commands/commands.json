@@ -27,6 +27,6 @@
 	{"command": "ark", "exactRole": "ARK Server Manager", "subcommands": [
 		{"command": "status", "function": "commandArkStatus"},
 		{"command": "start", "function": "commandArkStart"},
-		{"command": "stop", "function": "commandArkStop"},
+		{"command": "stop", "function": "commandArkStop"}
 	]}
 ]
