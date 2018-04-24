@@ -23,7 +23,7 @@
         {"command": "roles", "function": "commandPrintRoles", "permission": "MANAGE_ROLES"},
         {"command": "channels", "function": "commandPrintChannels", "permission": "MANAGE_CHANNELS"}
     ]},
-	{"command": "wol", "function": "commandWakeOnLan", "permission": "ADMINISTRATOR"}
+	{"command": "wol", "function": "commandWakeOnLan", "permission": "ADMINISTRATOR"},
 	{"command": "ark", "exactRole": "ARK Server Manager", "subcommands": [
 		{"command": "status", "function": "commandArkStatus"},
 		{"command": "start", "function": "commandArkStart"},
