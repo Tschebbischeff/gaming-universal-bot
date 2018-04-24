@@ -28,5 +28,8 @@
 		{"command": "status", "function": "commandArkStatus"},
 		{"command": "start", "function": "commandArkStart"},
 		{"command": "stop", "function": "commandArkStop"}
+	]},
+	{"command": "fuck", "subcommands": [
+		{"command": "you", "function": "commandFuckYou"}
 	]}
 ]

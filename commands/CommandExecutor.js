@@ -281,6 +281,20 @@ class CommandExecutor { constructor() {
     this.commandArkStop = function(message, preCommand, command, args) {
         handleResult(message, "This function is not yet implemented. Sorry.")
     }
+
+    this.commandFuckYou = function(message, preCommand, command, args) {
+        let rand = Math.floor(Math.random() * 3);
+        switch(rand) {
+            case 2:
+                handleResult(message, "No u");
+                break;
+            case 1:
+                handleResult(message, "I would if I could... what?");
+                break;
+            default:
+                handleResult(message, "Fuck yourself!");
+        }
+    }
 }}
 
 module.exports = new CommandExecutor();
