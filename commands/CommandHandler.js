@@ -1,15 +1,15 @@
 'use strict'
 
 class CommandHandler { constructor() {
-    
+
 	const config = require("./../config/Config");
 	const commandExecutor = require("./CommandExecutor");
     let commandDefinitions = require("./commands.json");
-	
+
 	let concatCommandChain = function(preCommand, command) {
         return preCommand == "" ? command : preCommand + " " + command;
     }
-    
+
     let handleSubCommand = function(message, preCommand, command, args, commandDef) {
         for (let i = 0; i < commandDef.length; i++) {
             if (commandDef[i].command.toLowerCase() == command.toLowerCase()) {
@@ -21,6 +21,14 @@ class CommandHandler { constructor() {
 						return "You have no permission to execute '"+concatCommandChain(preCommand, command)+"'!";
 					}
 				}
+                //Check minimum role
+                if (commandDef[i].hasOwnProperty("minimumRole")) {
+                    //TODO: Check minimum role
+                }
+                //Check exact role
+                if (commandDef[i].hasOwnProperty("exactRole")) {
+                    //TODO: Check exact role
+                }
 				//Check subcommands
                 if (args.length > 0 && commandDef[i].hasOwnProperty("subcommands") && commandDef[i].subcommands.length > 0) {
                     let subPreCommand = ((preCommand == "" ? "" : preCommand + " ") + command);
@@ -38,7 +46,7 @@ class CommandHandler { constructor() {
         }
         return ("Unknown command: " + command);
     }
-        
+
     this.handleCommand = function(message) {
         const args = message.content.slice(config.getPrefix().length).trim().match(/"([^"]*)"|'([^']*)'|[^\s]+/g);
         for (let i = 0; i < args.length; i++) {

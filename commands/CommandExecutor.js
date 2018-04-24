@@ -1,26 +1,26 @@
 'use strict'
 
 class CommandExecutor { constructor() {
-    
+
 	const discordClient = require("./../DiscordClient");
 	const config = require("./../config/Config");
 	const logger = require("./../logger/Logger");
 	const gubLib = require("./../GUBLib");
 	const asyncTaskHandler = require("./../async/AsyncTaskHandler");
-	
+
 	let commandDefinitions = require("./commands.json");
 	let commandHelp = require("./commands_help.json");
-    
+
     let handleResult = function(message, result) {
         if (result != null) {
             message.channel.send(result);
         }
     }
-    
+
     let concatCommandChain = function(preCommand, command) {
         return preCommand == "" ? command : preCommand + " " + command;
     }
-	
+
 	let getHelpDefinition = function(preCommand, command) {
 		let commandChain = concatCommandChain(preCommand, command);
 		if (commandHelp.hasOwnProperty(commandChain.toLowerCase())) {
@@ -29,7 +29,7 @@ class CommandExecutor { constructor() {
 			return null;
 		}
 	}
-	
+
 	let getCommandDefinition = function(commandChain, commandDef) {
 		let topLevelCommand = commandChain[0];
 		for (let i = 0; i < commandDef.length; i++) {
@@ -43,7 +43,7 @@ class CommandExecutor { constructor() {
 		}
 		return null;
 	}
-    
+
     let displayHelp = function(message, preCommand, command) {
 		let helpMessage = {embed: {color: 4359924, title: "__Help for command: \"" + concatCommandChain(preCommand, command) + "\"__", type: "rich"}};
 		let helpOutputType = "channel";
@@ -68,7 +68,7 @@ class CommandExecutor { constructor() {
 					} else {
 						fieldsValue += "\n\t"+subHelpDefinition.short.replace("\n", "\n\t");
 					}
-					
+
 				}
 				helpMessage.embed.fields = [{name: "Commands:", value: fieldsValue}];
 			} else {
@@ -101,7 +101,7 @@ class CommandExecutor { constructor() {
 				break;
 		}
     }
-    
+
     this.commandHelp = function(message, preCommand, command, args) {
 		if (preCommand == "" && command == "help" && args.length > 0) {
 			displayHelp(message, args.slice(0,-1).join(" "), args.slice(-1)[0]);
@@ -109,7 +109,7 @@ class CommandExecutor { constructor() {
 			displayHelp(message, preCommand, command);
 		}
     }
-    
+
     this.commandTasksEnable = function(message, preCommand, command, args) {
         if (args.length == 0) {
             displayHelp(message, preCommand, command);
@@ -117,7 +117,7 @@ class CommandExecutor { constructor() {
             handleResult(message, asyncTaskHandler.enableTaskByName(args[0]));
         }
     }
-    
+
     this.commandTasksDisable = function(message, preCommand, command, args) {
         if (args.length == 0) {
             displayHelp(message, preCommand, command);
@@ -125,15 +125,15 @@ class CommandExecutor { constructor() {
             handleResult(message, asyncTaskHandler.disableTaskByName(args[0]));
         }
     }
-    
+
     this.commandConfigReset = function(message, preCommand, command, args) {
         handleResult(message, config.reset());
     }
-    
+
     this.commandTasksReset = function(message, preCommand, command, args) {
         handleResult(message, asyncTaskHandler.resetTaskDefinitions());
     }
-    
+
     this.commandConfigSetRainbowRole = function(message, preCommand, command, args) {
         if (args.length == 0) {
             displayHelp(message, preCommand, command);
@@ -156,7 +156,7 @@ class CommandExecutor { constructor() {
             }
         }
     }
-	
+
 	this.commandConfigSetServerLogChannel = function(message, preCommand, command, args) {
         if (args.length == 0) {
             displayHelp(message, preCommand, command);
@@ -179,7 +179,7 @@ class CommandExecutor { constructor() {
             }
         }
     }
-    
+
     this.commandConfigSetGuildWars2Channel = function(message, preCommand, command, args) {
         if (args.length == 0) {
             displayHelp(message, preCommand, command);
@@ -202,32 +202,32 @@ class CommandExecutor { constructor() {
             }
         }
     }
-	
+
 	this.commandLogsReset = function(message, preCommand, command, args) {
 		handleResult(message, logger.reset());
 	}
-	
+
 	this.commandLogsShow = function(message, preCommand, command, args) {
 		if (args.length > 0) {
-		if (!isNaN(args[0])) {
-			let pageNumber = parseInt(args[0]);
-			if (pageNumber > 0) {
-				handleResult(message, logger.getLogPage(pageNumber));
-			} else {
-				handleResult(message, "Please specify a page number above zero!");
-			}
-		} else {
-			handleResult(message, "Sorry, the argument \"" + args[0] + "\" is not a number!");
-		}
+    		if (!isNaN(args[0])) {
+    			let pageNumber = parseInt(args[0]);
+    			if (pageNumber > 0) {
+    				handleResult(message, logger.getLogPage(pageNumber));
+    			} else {
+    				handleResult(message, "Please specify a page number above zero!");
+    			}
+    		} else {
+    			handleResult(message, "Sorry, the argument \"" + args[0] + "\" is not a number!");
+    		}
 		} else {
 			handleResult(message, "You need to supply a page number!");
 		}
 	}
-    
+
     this.commandPrintTasks = function(message, preCommand, command, args) {
         handleResult(message, asyncTaskHandler.print());
     }
-    
+
     this.commandPrintRoles = function(message, preCommand, command, args) {
         let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available) {
@@ -240,7 +240,7 @@ class CommandExecutor { constructor() {
             handleResult(message, result);
         }
     }
-    
+
     this.commandPrintChannels = function(message, preCommand, command, args) {
         let gamingUniversal = gubLib.getValidGuild();
         if (gamingUniversal.available) {
@@ -251,10 +251,36 @@ class CommandExecutor { constructor() {
             handleResult(message, result);
         }
     }
-	
+
 	this.commandPrintConfig = function(message, preCommand, command, args) {
 		handleResult(message, config.print());
 	}
+
+    this.commandWakeOnLan = function(message, preCommand, command, args) {
+        handleResult(message, "This function is not yet implemented. Sorry.")
+    }
+
+    this.commandArkStatus = function(message, preCommand, command, args) {
+        handleResult(message, "This function is not yet implemented. Sorry.")
+    }
+
+    this.commandArkStart = function(message, preCommand, command, args) {
+        if (args.length > 0) {
+            if (args[0] == "Ragnarok") {
+                handleResult(message, "This function is not yet implemented. Sorry.")
+            } else if (args[0] == "Aberration") {
+                handleResult(message, "This function is not yet implemented. Sorry.")
+            } else {
+                handleResult(message, "A map with the name \"" + args[0] + "\" is not supported.")
+            }
+        } else {
+            handleResult(message, "You need to supply a map name! It can be either \"Ragnarok\" or \"Aberration\"!")
+        }
+    }
+
+    this.commandArkStop = function(message, preCommand, command, args) {
+        handleResult(message, "This function is not yet implemented. Sorry.")
+    }
 }}
 
 module.exports = new CommandExecutor();

@@ -93,5 +93,30 @@
 		"type": "channel",
 		"short": "Print channel names and IDs",
 		"long": "__Usage: print channels__\nPrint a list of names of all channels on the server, including their ID."
+	},
+	"wol": {
+		"type": "channel",
+		"short": "Send WOL package to main pc",
+		"long": "__Usage: wol__\nTry to send a wake-on-LAN package to the main computer to start it from a distance."
+	},
+	"ark": {
+		"type": "channel",
+		"short": "Manage the ARK server run on the main pc",
+		"long": "Start a specific map on the ARK server or stop the ARK server."
+	},
+	"ark status": {
+		"type": "channel",
+		"short": "Display the current status of the ARK server",
+		"long": "__Usage: ark status__\nQuery the current status of the ARK server, whether it is online and which map is currently selected."
+	},
+	"ark start": {
+		"type": "channel",
+		"short": "Try to start the ARK server",
+		"long": "__Usage: ark start <MapName>__\nTry to start the ARK server with the requested Map (either \"Ragnarok\" or \"Aberration\").\nThis command definitely fails if the server is already started, regardless of map."
+	},
+	"ark stop": {
+		"type": "channel",
+		"short": "Try to stop the ARK server",
+		"long": "__Usage: ark stop__\nTry to immediately shut down the ARK server."
 	}
 }
